@@ -3,259 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Marka | Tienda Oficial</title>
+    <title>Tu Marka | Tienda Online</title>
     <style>
         :root {
             --petroleo: #004b57;
-            --purpura: #9b3081;
             --azul-claro: #007bbd;
-            --fondo: #f4f7f8;
+            --purpura: #9b3081;
+            --rosa: #ef476f;
+            --dorado: #d4af37;
+            --fondo: #f0f4f5;
             --blanco: #ffffff;
-            --verde-wa: #25D366;
-            --texto: #334155;
-            --degradado-huella: linear-gradient(45deg, #007bbd, #9b3081, #004b57);
+            --verde-wa: #00c853;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
-        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; background: var(--fondo); color: var(--texto); padding-bottom: 110px; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background: var(--fondo); color: #333; padding-bottom: 120px; }
 
-        /* HEADER CON LOGO DE HUELLA */
-        header { background: var(--blanco); padding: 1.5rem 1rem; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        
-        .huella-container { width: 60px; height: 60px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; }
-        .huella-svg { width: 50px; height: 50px; fill: url(#grad1); }
+        /* HEADER & LOGO DINÁMICO */
+        header { background: var(--blanco); padding: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .logo-img { max-width: 150px; height: auto; margin-bottom: 10px; display: none; margin-left: auto; margin-right: auto; }
+        .puntos-decorativos { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
+        .punto { width: 12px; height: 12px; border-radius: 50%; }
 
-        .logo-texto { font-size: 1.6rem; font-weight: 800; color: var(--petroleo); margin: 0; text-transform: uppercase; letter-spacing: -0.5px; }
-        .sub-logo { font-size: 0.75rem; color: var(--azul-claro); letter-spacing: 3px; font-weight: bold; margin-bottom: 8px; }
+        /* BANNER SUPERIOR NEGRO */
+        .top-delivery-bar { background: #003038; color: white; padding: 10px; text-align: center; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-        .puntos-decorativos { display: flex; justify-content: center; gap: 6px; }
-        .punto { width: 9px; height: 9px; border-radius: 50%; }
-        .p-1 { background: #007bbd; }
-        .p-2 { background: #9b3081; }
-        .p-3 { background: #004b57; }
-        .p-4 { background: #00a896; }
-        .p-5 { background: #5e2ca5; }
+        .contenedor { max-width: 800px; margin: 0 auto; padding: 15px; }
 
-        .contenedor { max-width: 900px; margin: 0 auto; padding: 15px; }
+        /* BUSCADOR */
+        .search-container { position: relative; margin: 20px 0; }
+        #buscador { width: 100%; padding: 12px 45px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; outline: none; }
+        .search-icon { position: absolute; left: 15px; top: 12px; color: #888; }
 
-        /* BANNER DELIVERY */
-        .banner-delivery {
-            background: linear-gradient(135deg, #004b57 0%, #007bbd 100%);
+        /* BANNER PROMOCIONAL (IMAGEN REFERENCIA) */
+        .promo-banner {
+            background: linear-gradient(135deg, #006d77 0%, #00b4d8 100%);
             border-radius: 15px;
-            padding: 20px;
+            padding: 30px;
             color: white;
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin: 10px 0 20px;
-            box-shadow: 0 4px 15px rgba(0,75,87,0.2);
+            justify-content: space-between;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
         }
-        .banner-info h3 { margin: 0; font-size: 1.2rem; }
-        .banner-info p { margin: 5px 0 0; font-size: 0.85rem; opacity: 0.9; }
-        .banner-img { font-size: 2.5rem; }
+        .promo-banner h2 { margin: 0; font-size: 1.8rem; font-weight: 800; }
+        .promo-banner p { margin: 5px 0 0; opacity: 0.9; }
+        .promo-icon { width: 100px; filter: brightness(0) invert(1); opacity: 0.9; }
 
-        /* BUSCADOR */
-        .search-box { position: relative; margin-bottom: 20px; }
-        #buscador { width: 100%; padding: 12px 40px; border-radius: 12px; border: 1.5px solid #e2e8f0; font-size: 1rem; }
-        .search-icon { position: absolute; left: 15px; top: 12px; color: #94a3b8; }
-
-        /* CATEGORIAS */
-        .categorias { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 15px; scrollbar-width: none; }
-        .categorias::-webkit-scrollbar { display: none; }
-        .btn-cat { background: white; border: 1px solid #e2e8f0; padding: 8px 16px; border-radius: 10px; white-space: nowrap; font-weight: 600; cursor: pointer; color: var(--petroleo); }
+        /* CATEGORÍAS */
+        .cat-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; scrollbar-width: none; }
+        .btn-cat { background: white; border: 1px solid #ddd; padding: 10px 20px; border-radius: 10px; font-weight: 600; cursor: pointer; color: #555; }
         .btn-cat.activo { background: var(--petroleo); color: white; border-color: var(--petroleo); }
 
-        /* GRID */
-        .galeria { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .producto { background: white; border-radius: 15px; overflow: hidden; border: 1px solid #f1f5f9; display: flex; flex-direction: column; position: relative; }
-        .producto img { width: 100%; height: 160px; object-fit: cover; }
+        /* GRID DE PRODUCTOS */
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; display: flex; flex-direction: column; }
+        .card img { width: 100%; height: 160px; object-fit: cover; background: #fafafa; }
+        .badge-hoy { position: absolute; top: 10px; right: 10px; background: var(--petroleo); color: white; font-size: 0.6rem; font-weight: bold; padding: 4px 8px; border-radius: 20px; }
         
-        .p-info { padding: 12px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .p-nombre { font-size: 0.85rem; font-weight: 700; height: 2.5em; overflow: hidden; margin-bottom: 8px; }
-        .btn-ver { color: var(--azul-claro); font-size: 0.75rem; font-weight: bold; cursor: pointer; margin-bottom: 10px; display: block; }
-        .precio { font-size: 1.1rem; font-weight: 800; color: var(--petroleo); margin-bottom: 10px; }
-        .btn-add { background: var(--petroleo); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
+        .card-body { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-name { font-size: 0.85rem; font-weight: 600; color: #444; margin-bottom: 5px; }
+        .card-ver { color: #888; font-size: 0.75rem; cursor: pointer; text-decoration: underline; margin-bottom: 10px; display: block; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; }
+        .card-price { font-weight: 800; font-size: 1.1rem; color: #222; }
+        .btn-add { background: var(--petroleo); color: white; border: none; padding: 8px 15px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
 
         /* MODALES */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
-        .modal-content { background: white; width: 100%; max-width: 400px; border-radius: 20px; padding: 20px; position: relative; }
-        .ficha-img { width: 100%; height: 200px; object-fit: contain; background: #f8fafb; border-radius: 10px; }
-        .ficha-desc { background: #f1f5f9; padding: 15px; border-radius: 10px; font-size: 0.9rem; margin: 15px 0; border-left: 4px solid var(--purpura); }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: white; width: 100%; max-width: 400px; border-radius: 20px; padding: 25px; position: relative; }
 
-        /* FOOTER CART */
-        .footer-cart { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); z-index: 1500; }
-        .btn-pagar { background: var(--verde-wa); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 800; cursor: pointer; display: none; }
+        /* BARRA INFERIOR DE CARRITO (EXACTA A LA IMAGEN) */
+        .footer-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); z-index: 1000; }
+        .cart-info { display: flex; align-items: center; gap: 15px; font-size: 1.2rem; }
+        .btn-revisar { background: var(--verde-wa); color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; }
+
+        /* FOOTER INFO */
+        .info-footer { background: #003038; color: white; padding: 30px 20px; text-align: center; font-size: 0.8rem; line-height: 1.6; }
+        .info-footer a { color: #4cc9f0; text-decoration: none; }
+
+        @media (min-width: 600px) { .grid { grid-template-columns: repeat(3, 1fr); } }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="huella-container">
-        <svg class="huella-svg" viewBox="0 0 24 24">
-            <defs>
-                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#007bbd;stop-opacity:1" />
-                    <stop offset="50%" style="stop-color:#9b3081;stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#004b57;stop-opacity:1" />
-                </linearGradient>
-            </defs>
-            <path d="M17.81 4.47c-.08 0-.16-.02-.23-.06C15.66 3.42 14 3 12.01 3c-1.98 0-3.86.47-5.57 1.41-.24.13-.54.04-.67-.2-.13-.24-.04-.55.2-.68C7.82 2.52 9.86 2 12.01 2c2.13 0 3.99.47 5.57 1.39.24.14.32.44.18.68-.08.13-.23.2-.36.2-.19 0-.37-.1-.47-.2zm-2.55 3.1c-.02 0-.05 0-.07-.01-1.03-.31-2.23-.47-3.41-.47-1.4 0-2.82.23-4.08.66-.26.09-.54-.05-.63-.31-.09-.26.05-.54.31-.63 1.39-.47 2.96-.73 4.4-.73 1.31 0 2.64.18 3.78.52.26.08.41.36.33.62-.07.21-.27.35-.48.35zm3.89 2.52c-.04 0-.08 0-.13-.01-.27-.06-.44-.33-.38-.6.54-2.23.11-4.48-1.2-6.32-.16-.23-.1-.54.13-.7.23-.16.54-.1.7.13 1.45 2.03 1.93 4.54 1.33 7.01-.06.26-.3.43-.55.43-.03 0-.07 0-.11-.01zm-14.3 0c-.03 0-.07.01-.11.01-.25 0-.49-.17-.55-.43-.6-2.47-.12-4.98 1.33-7.01.16-.23.47-.29.7-.13.23.16.29.47.13.7-1.31 1.84-1.74 4.09-1.2 6.32.06.27-.11.54-.38.6-.05.01-.09.01-.13.01zm11.77 4.19c-.06 0-.12-.01-.19-.04-1.35-.61-3.08-.94-4.8-.94-1.5 0-3.06.25-4.48.74-.26.09-.54-.05-.63-.31-.09-.26.05-.54.31-.63 1.57-.54 3.29-.81 4.8-.81 1.87 0 3.75.36 5.25 1.04.25.11.35.41.24.66-.08.19-.28.3-.49.3zm-11.83 2.53c-.11 0-.21-.04-.3-.11-.21-.17-.24-.48-.07-.69 1.4-1.74 3.49-2.73 5.74-2.73 2.16 0 4.29.93 5.73 2.5a.5.5 0 01-.75.66c-1.23-1.34-3.04-2.14-4.98-2.14-2.02 0-3.88.88-5.11 2.41-.07.08-.17.13-.27.13zm10.23 3.97c-.01 0-.02 0-.03.01-.16.03-.31-.05-.39-.19-.54-1.04-1.22-1.92-2.01-2.61-.83-.71-1.78-1.08-2.82-1.08-1.57 0-3.01.81-3.95 2.2a.5.5 0 01-.83-.56c1.13-1.66 2.87-2.64 4.78-2.64 1.25 0 2.39.44 3.39 1.29.89.76 1.66 1.76 2.27 2.94.13.24.03.55-.21.68-.07.04-.13.06-.2.06zm-7.22 3.14c-.06 0-.11-.01-.17-.03-1.05-.44-1.83-1.21-2.31-2.27-.47-1.04-.54-2.13-.21-3.23.08-.26.36-.41.62-.33.26.08.41.36.33.62-.26.85-.2 1.69.17 2.5.37.82.98 1.41 1.8 1.76.25.1.37.4.27.65-.08.19-.26.3-.47.3zm4.55-1.12c-.17 0-.33-.1-.43-.26-1.11-1.89-1.23-4.14-.34-6.17.03-.08.1-.15.19-.19.1-.05.21-.06.31-.01 1.45.64 2.37 2.11 2.37 3.79 0 1.28-.46 2.41-1.37 3.35-.18.19-.48.2-.67.01-.11-.08-.18-.2-.2-.33z"/>
-        </svg>
-    </div>
-    <div class="logo-texto">TU MARKA</div>
-    <div class="sub-logo">TIENDA ONLINE</div>
+    <img id="logo-dinamico" src="" class="logo-img" alt="Logo">
     <div class="puntos-decorativos">
-        <div class="punto p-1"></div>
-        <div class="punto p-2"></div>
-        <div class="punto p-3"></div>
-        <div class="punto p-4"></div>
-        <div class="punto p-5"></div>
+        <div class="punto" style="background:var(--petroleo)"></div>
+        <div class="punto" style="background:var(--azul-claro)"></div>
+        <div class="punto" style="background:var(--purpura)"></div>
+        <div class="punto" style="background:var(--rosa)"></div>
+        <div class="punto" style="background:var(--dorado)"></div>
     </div>
 </header>
 
+<div class="top-delivery-bar">
+    <span>🛵 Delivery disponible (Costo según destino)</span>
+</div>
+
 <div class="contenedor">
-    
-    <div class="banner-delivery">
-        <div class="banner-img">🛵</div>
-        <div class="banner-info">
-            <h3>Delivery Activo</h3>
-            <p>Recibe tu pedido hoy mismo en la puerta de tu casa.</p>
-        </div>
-    </div>
-
-    <div class="search-box">
+    <div class="search-container">
         <span class="search-icon">🔍</span>
-        <input type="text" id="buscador" placeholder="¿Qué buscas hoy?" oninput="filtrar()">
+        <input type="text" id="buscador" placeholder="Search" oninput="filtrar()">
     </div>
 
-    <div class="categorias" id="cat-bar">
+    <div class="promo-banner">
+        <div>
+            <h2>Delivery Activo 🛵</h2>
+            <p>Recibe tu pedido en la puerta de tu casa hoy mismo.</p>
+        </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/679/679720.png" class="promo-icon" alt="Paquete">
+    </div>
+
+    <h3>Categorías</h3>
+    <div class="cat-scroll" id="cat-bar">
         <button class="btn-cat activo" onclick="cambiarCat('todos', this)">Todos</button>
     </div>
 
-    <div id="loader" style="text-align:center; padding:50px; font-weight:bold;">Cargando productos...</div>
-    <div class="galeria" id="grid"></div>
+    <div id="loader" style="text-align:center; padding:50px;">Cargando experiencia...</div>
+    <div class="grid" id="grid-productos"></div>
 </div>
 
 <div id="modalFicha" class="modal" onclick="cerrar()">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <img id="m-img" class="ficha-img">
-        <h2 id="m-nombre" style="margin:10px 0 5px; font-size:1.2rem; color:var(--petroleo);"></h2>
-        <div id="m-desc" class="ficha-desc"></div>
-        <div id="m-precio" style="font-size:1.5rem; font-weight:900; color:var(--azul-claro); margin-bottom:15px;"></div>
-        
-        <button id="m-btn-add" class="btn-add" style="padding:15px;">🛒 Agregar al Pedido</button>
+        <img id="f-img" style="width:100%; border-radius:10px; margin-bottom:15px;">
+        <h2 id="f-nombre" style="margin:0; color:var(--petroleo)"></h2>
+        <p id="f-desc" style="color:#666; margin:15px 0"></p>
+        <div style="font-size:1.5rem; font-weight:900; margin-bottom:20px;" id="f-precio"></div>
+        <button class="btn-revisar" style="width:100%" id="f-btn-add">Añadir al carrito</button>
     </div>
 </div>
 
-<div class="footer-cart">
-    <div onclick="abrirCart()" style="cursor:pointer;">
-        <span id="n-items" style="font-weight:bold; color:var(--purpura);">0 Productos</span>
-        <div id="f-total" style="font-size:1.3rem; font-weight:900; color:var(--petroleo);">$0.00</div>
+<div class="footer-bar">
+    <div class="cart-info">
+        <span style="font-size: 2rem;">🛒</span>
+        <div>
+            <b id="cart-count">0 Items</b><br>
+            <span id="cart-total" style="font-weight: 900;">$0.00</span>
+        </div>
     </div>
-    <button id="btn-wa" class="btn-pagar" onclick="enviarWA()">Enviar Pedido 🚀</button>
+    <button class="btn-revisar" onclick="enviarWA()">Revisar Carrito</button>
+</div>
+
+<div class="info-footer">
+    <p id="footer-dir">...</p>
+    <a id="footer-map" target="_blank">📍 Ver ubicación en Google Maps</a>
 </div>
 
 <script>
-    const HOJA_PROD = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTdjQeudLeSccCORPmrQSFjuC826ZE7Mm7pgxRQ99RBmfcMw9Xb6QmRETG--HavNoe_xGX2QtPtOfC7/pub?gid=0&single=true&output=csv';
-    const HOJA_CONF = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTdjQeudLeSccCORPmrQSFjuC826ZE7Mm7pgxRQ99RBmfcMw9Xb6QmRETG--HavNoe_xGX2QtPtOfC7/pub?gid=283577687&single=true&output=csv';
+    // ENLACES DE TU GOOGLE SHEETS
+    const SHEETS_PRODUCTOS = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTdjQeudLeSccCORPmrQSFjuC826ZE7Mm7pgxRQ99RBmfcMw9Xb6QmRETG--HavNoe_xGX2QtPtOfC7/pub?gid=0&single=true&output=csv';
+    const SHEETS_CONFIG = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTdjQeudLeSccCORPmrQSFjuC826ZE7Mm7pgxRQ99RBmfcMw9Xb6QmRETG--HavNoe_xGX2QtPtOfC7/pub?gid=283577687&single=true&output=csv';
 
-    let DB = [], CART = [], CONFIG = {tel:''}, catSel = 'todos';
+    let productos = [], carrito = [], config = {};
+    let catSel = 'todos';
 
-    async function cargar() {
+    async function init() {
         try {
-            const rC = await fetch(HOJA_CONF);
-            const dC = await rC.text();
-            dC.split(/\r?\n/).forEach(f => {
-                const [k, v] = f.split(',');
-                if(k && k.toLowerCase().includes('tel')) CONFIG.tel = v.trim().replace(/\s+/g, '');
+            // Cargar Configuración (Logo, Teléfono, Dirección)
+            const respConf = await fetch(SHEETS_CONFIG);
+            const dataConf = await respConf.text();
+            dataConf.split(/\r?\n/).forEach(fila => {
+                const [llave, valor] = fila.split(',');
+                if(llave && valor) {
+                    let k = llave.toLowerCase().trim();
+                    let v = valor.trim().replace(/^"|"$/g, '');
+                    if(k.includes('logo')) {
+                        const img = document.getElementById('logo-dinamico');
+                        img.src = v;
+                        img.style.display = 'block';
+                    }
+                    if(k.includes('tel')) config.telefono = v.replace(/\s+/g, '');
+                    if(k.includes('dir')) document.getElementById('footer-dir').innerText = v;
+                    if(k.includes('map')) document.getElementById('footer-map').href = v;
+                }
             });
 
-            const rP = await fetch(HOJA_PROD);
-            const dP = await rP.text();
-            DB = dP.split(/\r?\n/).slice(1).map(f => {
-                const c = f.split(',');
-                return { id:c[0], nombre:c[1], precio:parseFloat(c[2])||0, cat:c[3]?.toLowerCase().trim(), img:c[5], desc:c[7] };
+            // Cargar Productos
+            const respProd = await fetch(SHEETS_PRODUCTOS);
+            const dataProd = await respProd.text();
+            productos = dataProd.split(/\r?\n/).slice(1).map(fila => {
+                const c = fila.split(',');
+                return { id:c[0], nombre:c[1], precio:parseFloat(c[2])||0, cat:c[3]?.toLowerCase().trim(), hoy:c[6]?.toLowerCase().trim()==='si', img:c[5], desc:c[7] };
             }).filter(p => p.nombre);
 
-            [...new Set(DB.map(p => p.cat))].forEach(c => {
-                if(!c) return;
-                let b = document.createElement('button');
-                b.className = 'btn-cat';
-                b.innerText = c.charAt(0).toUpperCase() + c.slice(1);
-                b.onclick = (e) => cambiarCat(c, e.target);
-                document.getElementById('cat-bar').appendChild(b);
+            // Generar Categorías dinámicas
+            const cats = [...new Set(productos.map(p => p.cat))].filter(Boolean);
+            cats.forEach(c => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-cat';
+                btn.innerText = c.charAt(0).toUpperCase() + c.slice(1);
+                btn.onclick = (e) => cambiarCat(c, e.target);
+                document.getElementById('cat-bar').appendChild(btn);
             });
 
-            document.getElementById('loader').style.display='none';
-            mostrar(DB);
-        } catch(e) { console.error(e); }
+            document.getElementById('loader').style.display = 'none';
+            render(productos);
+        } catch (e) { console.error("Error cargando datos:", e); }
     }
 
-    function mostrar(lista) {
-        const g = document.getElementById('grid');
-        g.innerHTML = '';
+    function render(lista) {
+        const grid = document.getElementById('grid-productos');
+        grid.innerHTML = '';
         lista.forEach(p => {
-            g.innerHTML += `
-                <div class="producto">
-                    <img src="${p.img}" loading="lazy">
-                    <div class="p-info">
-                        <div class="p-nombre">${p.nombre}</div>
-                        <span class="btn-ver" onclick="ver('${p.id}')">Ver más detalles</span>
-                        <div class="precio">$${p.precio.toFixed(2)}</div>
-                        <button class="btn-add" onclick="add('${p.id}')">Añadir</button>
+            grid.innerHTML += `
+                <div class="card">
+                    ${p.hoy ? '<div class="badge-hoy">HOY</div>' : ''}
+                    <img src="${p.img}" alt="${p.nombre}" loading="lazy">
+                    <div class="card-body">
+                        <div>
+                            <div class="card-name">${p.nombre}</div>
+                            <span class="card-ver" onclick="verDetalle('${p.id}')">Ver detalles</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-price">$${p.precio.toFixed(2)}</div>
+                            <button class="btn-add" onclick="agregar('${p.id}')">Añadir</button>
+                        </div>
                     </div>
                 </div>`;
         });
     }
 
-    window.ver = (id) => {
-        let p = DB.find(x => x.id == id);
-        document.getElementById('m-img').src = p.img;
-        document.getElementById('m-nombre').innerText = p.nombre;
-        document.getElementById('m-desc').innerText = p.desc || "Calidad garantizada.";
-        document.getElementById('m-precio').innerText = `$${p.precio.toFixed(2)}`;
-        document.getElementById('m-btn-add').onclick = () => { add(id); cerrar(); };
-        document.getElementById('modalFicha').style.display='flex';
+    window.verDetalle = (id) => {
+        const p = productos.find(x => x.id == id);
+        document.getElementById('f-img').src = p.img;
+        document.getElementById('f-nombre').innerText = p.nombre;
+        document.getElementById('f-desc').innerText = p.desc || "Calidad y estilo garantizado.";
+        document.getElementById('f-precio').innerText = `$${p.precio.toFixed(2)}`;
+        document.getElementById('f-btn-add').onclick = () => { agregar(id); cerrar(); };
+        document.getElementById('modalFicha').style.display = 'flex';
     };
 
-    window.add = (id) => {
-        let p = DB.find(x => x.id == id);
-        CART.push(p);
-        actualizar();
+    window.agregar = (id) => {
+        const p = productos.find(x => x.id == id);
+        carrito.push(p);
+        actualizarCarrito();
     };
 
-    function actualizar() {
-        let t = 0;
-        CART.forEach(i => t += i.precio);
-        document.getElementById('n-items').innerText = `${CART.length} Productos`;
-        document.getElementById('f-total').innerText = `$${t.toFixed(2)}`;
-        document.getElementById('btn-wa').style.display = CART.length > 0 ? 'block' : 'none';
+    function actualizarCarrito() {
+        const total = carrito.reduce((sum, p) => sum + p.precio, 0);
+        document.getElementById('cart-count').innerText = `${carrito.length} Items`;
+        document.getElementById('cart-total').innerText = `$${total.toFixed(2)}`;
     }
 
     function enviarWA() {
-        let t = 0;
-        let pStr = CART.map((i, idx) => {
-            t += i.precio;
-            return `${idx+1}. *${i.nombre}* - $${i.precio.toFixed(2)}`;
-        }).join('%0A');
-        let m = `*NUEVO PEDIDO TU MARKA*%0A%0A${pStr}%0A%0A*TOTAL: $${t.toFixed(2)}*%0A%0A_Acordamos el pago por aquí._`;
-        window.open(`https://wa.me/${CONFIG.tel}?text=${m}`, '_blank');
+        if(carrito.length === 0) return alert("El carrito está vacío");
+        const total = carrito.reduce((sum, p) => sum + p.precio, 0);
+        const lista = carrito.map((p, i) => `${i+1}. *${p.nombre}* ($${p.precio.toFixed(2)})`).join('%0A');
+        const msg = `*NUEVO PEDIDO*%0A--------------------------%0A${lista}%0A%0A*TOTAL: $${total.toFixed(2)}*%0A--------------------------%0A📍 Acordar pago y entrega por aquí.`;
+        window.open(`https://wa.me/${config.telefono}?text=${msg}`, '_blank');
     }
 
-    window.cerrar = () => document.getElementById('modalFicha').style.display='none';
-    window.cambiarCat = (c, b) => {
-        document.querySelectorAll('.btn-cat').forEach(x => x.classList.remove('activo'));
-        b.classList.add('activo');
+    window.cerrar = () => document.getElementById('modalFicha').style.display = 'none';
+
+    window.cambiarCat = (c, btn) => {
+        document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('activo'));
+        btn.classList.add('activo');
         catSel = c;
         filtrar();
     };
+
     window.filtrar = () => {
-        let v = document.getElementById('buscador').value.toLowerCase();
-        let f = DB.filter(p => p.nombre.toLowerCase().includes(v) && (catSel === 'todos' || p.cat === catSel));
-        mostrar(f);
+        const busqueda = document.getElementById('buscador').value.toLowerCase();
+        const filtrados = productos.filter(p => 
+            p.nombre.toLowerCase().includes(busqueda) && (catSel === 'todos' || p.cat === catSel)
+        );
+        render(filtrados);
     };
 
-    cargar();
+    init();
 </script>
 </body>
 </html>
