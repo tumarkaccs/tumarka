@@ -30,6 +30,25 @@
 
         .contenedor { max-width: 900px; margin: 0 auto; padding: 15px; }
 
+        /* BANNER DELIVERY */
+        .banner-delivery {
+            background: linear-gradient(135deg, var(--petroleo) 0%, var(--azul-claro) 100%);
+            border-radius: 20px;
+            padding: 25px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,75,87,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .banner-text h2 { margin: 0; font-size: 1.4rem; font-weight: 900; text-transform: uppercase; }
+        .banner-text p { margin: 5px 0 0; opacity: 0.9; font-size: 0.9rem; font-weight: 500; }
+        .banner-icon { font-size: 3.5rem; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2)); }
+        .banner-decor { position: absolute; right: -20px; top: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%; }
+
         /* BUSCADOR */
         .search-box { position: relative; margin: 15px 0; }
         #buscador { width: 100%; padding: 14px 45px; border-radius: 15px; border: 2px solid #edf2f7; background: white; font-size: 1rem; transition: 0.3s; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
@@ -98,6 +117,16 @@
 </header>
 
 <div class="contenedor">
+    
+    <div class="banner-delivery">
+        <div class="banner-decor"></div>
+        <div class="banner-text">
+            <h2>Delivery Activo 🛵</h2>
+            <p>Recibe tu pedido en la puerta de tu casa hoy mismo.</p>
+        </div>
+        <div class="banner-icon">📦</div>
+    </div>
+
     <div class="search-box">
         <span class="search-icon">🔍</span>
         <input type="text" id="buscador" placeholder="¿Qué estás buscando?" oninput="filtrar()">
@@ -161,7 +190,7 @@
 <div class="seccion-final">
     <p id="f-dir" style="font-size:0.9rem;">...</p>
     <a id="f-map" style="color:white; font-weight:bold; text-decoration:underline;" target="_blank">Ver en Google Maps</a>
-    <p style="font-size:0.8rem; margin-top:20px; opacity:0.6;">Tu Marka &copy; 2024 - Todos los derechos reservados</p>
+    <p style="font-size:0.8rem; margin-top:20px; opacity:0.6;">Tu Marka &copy; 2026 - Todos los derechos reservados</p>
 </div>
 
 <script>
