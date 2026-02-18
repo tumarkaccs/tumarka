@@ -27,6 +27,14 @@
         .p-1 { background: var(--petroleo); }
         .p-2 { background: var(--purpura); }
         .p-3 { background: var(--azul-claro); }
+        
+        /* Estilo para el logo dinámico */
+        .logo-img { 
+            max-width: 150px; 
+            height: auto; 
+            margin: 0 auto 10px; 
+            display: none; /* Se activará solo si hay un link en Sheets */
+        }
 
         .contenedor { max-width: 900px; margin: 0 auto; padding: 15px; }
 
@@ -88,6 +96,7 @@
 <body>
 
 <header>
+    <img id="logo-dinamico" src="" class="logo-img" alt="Logo">
     <div class="sub-logo">Premium Collection</div>
     <div class="logo-texto">TU MARKA</div>
     <div class="puntos-decorativos">
@@ -183,6 +192,11 @@
                     if(clave.includes("tel")) CONFIG.tel = valor.replace(/\s+/g, '');
                     if(clave.includes("dir")) CONFIG.dir = valor;
                     if(clave.includes("map")) CONFIG.map = valor;
+                    if(clave.includes("logo")) {
+                        const img = document.getElementById('logo-dinamico');
+                        img.src = valor;
+                        img.style.display = 'block';
+                    }
                 }
             });
             document.getElementById('f-dir').innerText = CONFIG.dir;
