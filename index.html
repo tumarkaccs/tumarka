@@ -284,7 +284,9 @@
         let msg = `*Tu Marka - Nuevo Pedido*%0A%0A` + lineas + `%0A%0A*TOTAL: $${total}*%0A` + `--------------------------%0A` + `📍 *Método:* ${encodeURIComponent(metodoEntrega)}%0A`;
         if(metodoEntrega === "Delivery") msg += `🏠 *Dirección:* ${encodeURIComponent(dir)}%0A%0A_Quedo atento al costo del envío._`;
 
-        window.open(`https://wa.me/${584129592731}?text=${msg}`, '_blank');
+        // USO DEL TELEFONO DEL EXCEL
+        const numWA = configApp.telefono || "584129592731";
+        window.open(`https://wa.me/${numWA}?text=${msg}`, '_blank');
         cerrarModalEnvio();
     }
 
