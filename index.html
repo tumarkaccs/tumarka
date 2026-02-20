@@ -52,18 +52,28 @@
             padding: 5px 0 15px 0; 
         }
 
+        /* Botones normales con borde resaltado */
         .btn-cat { 
             background: white; 
             color: var(--petroleo); 
-            border: 1.5px solid #eee; 
+            border: 2px solid var(--petroleo); /* Borde más grueso y con tu color principal */
             padding: 8px 18px; 
             border-radius: 20px; 
-            font-weight: 600; 
+            font-weight: 700; 
             white-space: nowrap; 
             cursor: pointer; 
             font-size: 0.85rem;
-            flex-grow: 1; /* Rellena el ancho de la fila */
-            max-width: fit-content; /* No permite que se estire demasiado */
+            flex-grow: 1;
+            max-width: fit-content;
+            transition: all 0.3s ease; /* Para que el cambio de color sea suave */
+        }
+
+        /* Botón SELECCIONADO (Color diferente al resto) */
+        .btn-cat.activo { 
+            background: var(--purpura); /* Cambia aquí el color del botón activo */
+            color: white; 
+            border-color: var(--purpura); 
+            box-shadow: 0 4px 10px rgba(155, 48, 129, 0.3); /* Sombra para que resalte */
         }
 
         /* GRID PRODUCTOS */
