@@ -45,10 +45,26 @@
         .search-icon { position: absolute; left: 15px; top: 14px; opacity: 0.4; }
 
         /* CATEGORÍAS */
-        .categorias { display: flex; gap: 10px; overflow-x: auto; padding: 5px 0 15px 0; scrollbar-width: none; }
-        .categorias::-webkit-scrollbar { display: none; }
-        .btn-cat { background: white; color: var(--petroleo); border: 1.5px solid #eee; padding: 8px 18px; border-radius: 20px; font-weight: 600; white-space: nowrap; cursor: pointer; font-size: 0.85rem; }
-        .btn-cat.activo { background: var(--petroleo); color: white; border-color: var(--petroleo); }
+        .categorias { 
+            display: flex; 
+            gap: 10px; 
+            flex-wrap: wrap; /* Esto permite que bajen a la siguiente fila */
+            padding: 5px 0 15px 0; 
+        }
+
+        .btn-cat { 
+            background: white; 
+            color: var(--petroleo); 
+            border: 1.5px solid #eee; 
+            padding: 8px 18px; 
+            border-radius: 20px; 
+            font-weight: 600; 
+            white-space: nowrap; 
+            cursor: pointer; 
+            font-size: 0.85rem;
+            flex-grow: 1; /* Rellena el ancho de la fila */
+            max-width: fit-content; /* No permite que se estire demasiado */
+        }
 
         /* GRID PRODUCTOS */
         .galeria { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
