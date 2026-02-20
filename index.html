@@ -44,36 +44,37 @@
         #buscador:focus { border-color: var(--azul-claro); box-shadow: 0 0 0 3px rgba(0,123,189,0.1); }
         .search-icon { position: absolute; left: 15px; top: 14px; opacity: 0.4; }
 
-        /* CATEGORÍAS */
+        /* SECCIÓN CATEGORÍAS FLEXIBLE Y SIN HUECOS */
         .categorias { 
-            display: flex; 
-            gap: 10px; 
-            flex-wrap: wrap; /* Esto permite que bajen a la siguiente fila */
-            padding: 5px 0 15px 0; 
+            display: grid; 
+            /* Esto crea columnas automáticas que miden mínimo 80px y máximo lo que sobre */
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); 
+            gap: 8px; 
+            padding: 10px 0 20px 0;
+            width: 100%;
         }
 
-        /* Botones normales con borde resaltado */
         .btn-cat { 
             background: white; 
             color: var(--petroleo); 
-            border: 2px solid var(--petroleo); /* Borde más grueso y con tu color principal */
-            padding: 8px 18px; 
-            border-radius: 20px; 
+            border: 2px solid var(--petroleo); 
+            padding: 10px 5px; 
+            border-radius: 12px; 
             font-weight: 700; 
-            white-space: nowrap; 
             cursor: pointer; 
-            font-size: 0.85rem;
-            flex-grow: 1;
-            max-width: fit-content;
-            transition: all 0.3s ease; /* Para que el cambio de color sea suave */
+            font-size: 0.8rem;
+            text-align: center;
+            transition: all 0.2s ease;
+            width: 100%; /* Obliga al botón a llenar su celda del grid */
+            display: block;
         }
 
-        /* Botón SELECCIONADO (Color diferente al resto) */
+        /* Color para el botón seleccionado (TODOS o cualquier otra) */
         .btn-cat.activo { 
-            background: var(--purpura); /* Cambia aquí el color del botón activo */
-            color: white; 
-            border-color: var(--purpura); 
-            box-shadow: 0 4px 10px rgba(155, 48, 129, 0.3); /* Sombra para que resalte */
+            background: var(--purpura) !important; /* !important asegura que cambie sí o sí */
+            color: white !important; 
+            border-color: var(--purpura) !important;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         /* GRID PRODUCTOS */
