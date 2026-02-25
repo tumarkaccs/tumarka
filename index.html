@@ -24,6 +24,13 @@
         .logo-texto { font-size: 1.7rem; font-weight: 900; color: var(--petroleo); margin: 0; letter-spacing: -1px; text-transform: uppercase; }
         .sub-logo { font-size: 0.7rem; color: var(--azul-claro); font-weight: bold; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 4px; }
         
+        /* PUNTOS DECORATIVOS */
+        .puntos-decorativos { display: flex; justify-content: center; gap: 6px; margin-top: 8px; }
+        .punto { width: 10px; height: 10px; border-radius: 50%; }
+        .p-1 { background: var(--petroleo); }
+        .p-2 { background: var(--purpura); }
+        .p-3 { background: var(--azul-claro); }
+        
         .logo-img { max-width: 150px; height: auto; margin: 0 auto 10px; display: none; }
 
         .contenedor { max-width: 1100px; margin: 0 auto; padding: 15px; }
@@ -43,29 +50,21 @@
         @media (min-width: 768px) { .galeria { grid-template-columns: repeat(3, 1fr); } }
         @media (min-width: 1024px) { .galeria { grid-template-columns: repeat(4, 1fr); } }
 
-        /* EFECTO SKELETON */
+        /* SKELETON */
         .skeleton {
-            background: var(--skeleton);
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
             border-radius: 10px;
         }
-
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
+        @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
         .sk-card { height: 280px; width: 100%; border-radius: 15px; background: white; border: 1px solid #eee; padding: 10px; }
         .sk-img { height: 150px; width: 100%; margin-bottom: 10px; }
         .sk-text { height: 15px; width: 80%; margin-bottom: 8px; }
-        .sk-price { height: 20px; width: 40%; }
 
         /* PRODUCTO */
         .producto { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #f0f0f0; display: flex; flex-direction: column; transition: transform 0.2s; position: relative; }
-        .producto img { width: 100%; height: 180px; object-fit: contain; background: white; padding: 10px; border-bottom: 1px solid #f1f5f9; }
-        
+        .producto img { width: 100%; height: 180px; object-fit: contain; background: white; padding: 10px; border-bottom: 1px solid #f1f5f9; cursor: pointer; }
         .badge-oferta { position: absolute; top: 8px; left: 8px; background: var(--purpura); color: white; font-size: 0.6rem; font-weight: 800; padding: 3px 8px; border-radius: 5px; text-transform: uppercase; z-index: 10; }
 
         .p-info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; text-align: center; }
@@ -73,7 +72,7 @@
         .precio { color: var(--petroleo); font-weight: 800; font-size: 1.1rem; margin-bottom: 10px; }
         .btn-add { background: var(--petroleo); color: white; border: none; padding: 10px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
 
-        /* MODALES Y CARRITO */
+        /* MODALES */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
         .modal-content { background: white; width: 100%; max-width: 450px; border-radius: 20px; padding: 25px; max-height: 90vh; overflow-y: auto; position: relative; }
         
@@ -82,6 +81,8 @@
         
         .item-c { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
         .btn-del { color: #ef4444; border: none; background: none; font-weight: bold; cursor: pointer; }
+
+        .btn-opcion { display: block; width: 100%; padding: 14px; margin: 10px 0; border: 2px solid #eee; border-radius: 12px; text-align: left; font-weight: bold; cursor: pointer; background: white; }
     </style>
 </head>
 <body>
@@ -90,6 +91,11 @@
     <img id="logo-dinamico" src="" class="logo-img" alt="Logo">
     <div class="sub-logo">Premium Collection</div>
     <div class="logo-texto">TU MARKA</div>
+    <div class="puntos-decorativos">
+        <div class="punto p-1"></div>
+        <div class="punto p-2"></div>
+        <div class="punto p-3"></div>
+    </div>
 </header>
 
 <div class="contenedor">
@@ -103,10 +109,10 @@
     </div>
 
     <div id="skeleton-container" class="galeria">
-        <div class="sk-card"><div class="sk-img skeleton"></div><div class="sk-text skeleton"></div><div class="sk-price skeleton"></div></div>
-        <div class="sk-card"><div class="sk-img skeleton"></div><div class="sk-text skeleton"></div><div class="sk-price skeleton"></div></div>
-        <div class="sk-card"><div class="sk-img skeleton"></div><div class="sk-text skeleton"></div><div class="sk-price skeleton"></div></div>
-        <div class="sk-card"><div class="sk-img skeleton"></div><div class="sk-text skeleton"></div><div class="sk-price skeleton"></div></div>
+        <div class="sk-card"><div class="sk-img skeleton"></div><div class="sk-text skeleton"></div></div>
+        <div class="sk-card"><div class="sk-img skeleton"></div><div class="sk-text skeleton"></div></div>
+        <div class="sk-card"><div class="sk-img skeleton"></div><div class="sk-text skeleton"></div></div>
+        <div class="sk-card"><div class="sk-img skeleton"></div><div class="sk-text skeleton"></div></div>
     </div>
 
     <div class="galeria" id="grid"></div>
@@ -119,6 +125,7 @@
         <div id="m-desc" style="background:#f8fafb; padding:15px; margin:15px 0; border-radius:10px; font-size:0.9rem;"></div>
         <div id="m-precio" style="font-size:1.5rem; font-weight:900; color:var(--azul-claro);"></div>
         <button id="m-btn-add" class="btn-add" style="margin-top:15px; padding:15px;">🛒 Agregar al Carrito</button>
+        <button onclick="cerrar()" style="width:100%; background:none; border:none; color:#94a3b8; margin-top:10px; cursor:pointer;">Cerrar</button>
     </div>
 </div>
 
@@ -127,10 +134,11 @@
         <h2 style="text-align:center;">Tu Pedido</h2>
         <div id="c-lista"></div>
         <div id="c-total" style="text-align:right; font-size:1.4rem; font-weight:900; margin:20px 0;"></div>
-        <button class="btn-opcion" style="width:100%; padding:15px; margin-bottom:10px; border-radius:10px; border:1px solid #ddd;" onclick="selEntrega('Retiro')">🏬 Retiro en Tienda</button>
-        <button class="btn-opcion" style="width:100%; padding:15px; border-radius:10px; border:1px solid #ddd;" onclick="abrirDelivery()">🛵 Delivery</button>
-        <input type="text" id="dir-val" placeholder="Dirección..." style="width:100%; padding:12px; margin-top:10px; display:none;">
-        <button class="btn-add" id="btn-final-wa" style="background:var(--verde-wa); margin-top:20px; display:none;" onclick="enviarWA()">🚀 Enviar WhatsApp</button>
+        <p style="font-weight:bold; margin-bottom:5px;">¿Cómo recibes tu compra?</p>
+        <button class="btn-opcion" onclick="selEntrega('Retiro en Tienda')">🏬 Retiro en Tienda</button>
+        <button class="btn-opcion" onclick="abrirDelivery()">🛵 Solicitar Delivery</button>
+        <input type="text" id="dir-val" placeholder="Dirección exacta..." style="width:100%; padding:12px; margin-top:10px; display:none; border-radius:8px; border:1px solid #ddd;">
+        <button class="btn-add" id="btn-final-wa" style="background:var(--verde-wa); margin-top:20px; display:none; padding:15px;" onclick="enviarWA()">🚀 Enviar Pedido por WhatsApp</button>
     </div>
 </div>
 
@@ -146,7 +154,7 @@
     const HOJA_PROD = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTdjQeudLeSccCORPmrQSFjuC826ZE7Mm7pgxRQ99RBmfcMw9Xb6QmRETG--HavNoe_xGX2QtPtOfC7/pub?gid=0&single=true&output=csv';
     const HOJA_CONF = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTdjQeudLeSccCORPmrQSFjuC826ZE7Mm7pgxRQ99RBmfcMw9Xb6QmRETG--HavNoe_xGX2QtPtOfC7/pub?gid=283577687&single=true&output=csv';
 
-    let DB = [], CART = [], CONFIG = {tel:'', dir:''};
+    let DB = [], CART = [], CONFIG = {tel:''};
     let catActual = 'todos', entregaM = '';
 
     async function cargar() {
@@ -156,9 +164,8 @@
             dC.split(/\r?\n/).forEach(f => {
                 const [k, v] = f.split(',');
                 if(k && v) {
-                    let c = k.toLowerCase();
-                    if(c.includes("tel")) CONFIG.tel = v.trim();
-                    if(c.includes("logo")) { document.getElementById('logo-dinamico').src = v.trim(); document.getElementById('logo-dinamico').style.display='block'; }
+                    if(k.toLowerCase().includes("tel")) CONFIG.tel = v.trim();
+                    if(k.toLowerCase().includes("logo")) { document.getElementById('logo-dinamico').src = v.trim(); document.getElementById('logo-dinamico').style.display='block'; }
                 }
             });
 
@@ -221,7 +228,7 @@
         let p = DB.find(x => x.id == id);
         document.getElementById('m-img').src = p.img;
         document.getElementById('m-nombre').innerText = p.nombre;
-        document.getElementById('m-desc').innerText = p.desc || "Sin descripción.";
+        document.getElementById('m-desc').innerText = p.desc || "Sin descripción disponible.";
         document.getElementById('m-precio').innerText = `$${p.precio.toFixed(2)}`;
         document.getElementById('m-btn-add').onclick = () => { addSimple(id); cerrar(); };
         document.getElementById('modalFicha').style.display = 'flex';
@@ -249,8 +256,20 @@
 
     function enviarWA() {
         let dir = document.getElementById('dir-val').value;
-        let m = `*PEDIDO TU MARKA*%0A${CART.map(i => `- ${i.nombre} ($${i.precio})`).join('%0A')}%0A%0A*TOTAL: ${document.getElementById('f-total').innerText}*%0A📍 Entrega: ${entregaM} ${dir}`;
+        if(entregaM === 'Delivery' && !dir) return alert("Por favor, ingresa tu dirección.");
+        
+        let total = 0;
+        let pStr = CART.map((i, idx) => {
+            total += i.precio;
+            return `${idx + 1}. *${i.nombre}* ($${i.precio.toFixed(2)})`;
+        }).join('%0A');
+
+        let m = `*¡Hola, Tu Marka!* 🙌%0AHe armado mi carrito y me gustaría procesar este pedido:%0A%0A*DETALLE DE MI COMPRA*%0A------------------------------------------%0A${pStr}%0A------------------------------------------%0A💰 *TOTAL A PAGAR: $${total.toFixed(2)}*%0A%0A📍 *Método de entrega:* ${entregaM}`;
+        if(entregaM === 'Delivery') m += `%0A🏠 *Dirección:* ${dir}`;
+        m += `%0A%0A✨ _Quedo atento/a para coordinar el pago. ¡Gracias!_`;
+
         window.open(`https://wa.me/${CONFIG.tel.replace(/\s+/g,'')}?text=${m}`, '_blank');
+        cerrar();
     }
 
     cargar();
