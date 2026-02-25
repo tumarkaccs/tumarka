@@ -28,12 +28,11 @@
         .p-2 { background: var(--purpura); }
         .p-3 { background: var(--azul-claro); }
         
-        /* Estilo para el logo dinámico */
         .logo-img { 
             max-width: 150px; 
             height: auto; 
             margin: 0 auto 10px; 
-            display: none; /* Se activará solo si hay un link en Sheets */
+            display: none; 
         }
 
         .contenedor { max-width: 900px; margin: 0 auto; padding: 15px; }
@@ -44,10 +43,9 @@
         #buscador:focus { border-color: var(--azul-claro); box-shadow: 0 0 0 3px rgba(0,123,189,0.1); }
         .search-icon { position: absolute; left: 15px; top: 14px; opacity: 0.4; }
 
-        /* SECCIÓN CATEGORÍAS FLEXIBLE Y SIN HUECOS */
+        /* CATEGORÍAS */
         .categorias { 
             display: grid; 
-            /* Esto crea columnas automáticas que miden mínimo 80px y máximo lo que sobre */
             grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); 
             gap: 8px; 
             padding: 10px 0 20px 0;
@@ -65,13 +63,12 @@
             font-size: 0.8rem;
             text-align: center;
             transition: all 0.2s ease;
-            width: 100%; /* Obliga al botón a llenar su celda del grid */
+            width: 100%;
             display: block;
         }
 
-        /* Color para el botón seleccionado (TODOS o cualquier otra) */
         .btn-cat.activo { 
-            background: var(--purpura) !important; /* !important asegura que cambie sí o sí */
+            background: var(--purpura) !important; 
             color: white !important; 
             border-color: var(--purpura) !important;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -101,7 +98,6 @@
         .ficha-img { width: 100%; height: 200px; object-fit: contain; border-radius: 12px; background: #f8fafb; margin-bottom: 15px; }
         .ficha-desc { background: #f1f5f9; padding: 15px; border-radius: 10px; font-size: 0.9rem; color: #475569; margin: 15px 0; border-left: 4px solid var(--purpura); text-align: left; }
 
-        /* SELECTOR CANTIDAD */
         .cant-box { display: flex; align-items: center; justify-content: center; gap: 20px; margin: 15px 0; }
         .btn-c { width: 36px; height: 36px; border-radius: 50%; border: 1px solid #ddd; background: white; font-weight: bold; cursor: pointer; }
 
@@ -110,7 +106,6 @@
         .cart-stats { display: flex; flex-direction: column; }
         .btn-main { background: var(--verde-wa); color: white; padding: 12px 25px; border-radius: 25px; border: none; font-weight: 800; cursor: pointer; display: none; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2); }
 
-        /* CARRITO LISTA */
         .item-c { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
         .btn-del { color: #ef4444; border: none; background: none; font-weight: bold; cursor: pointer; padding: 5px; }
 
@@ -140,7 +135,7 @@
     </div>
 
     <div class="categorias" id="cat-bar">
-        <button class="btn-cat activo" onclick="cambiarCat('todos', this)">Todos</button>
+        <button class="btn-cat activo" onclick="filtrarCat('todos', this)">Todos</button>
     </div>
 
     <div id="loader" style="text-align:center; padding:80px; font-weight:bold; color:var(--petroleo);">Abriendo catálogo...</div>
@@ -269,6 +264,30 @@
         });
     }
 
+    window.filtrarCat = function(categoria, btn) {
+        document.getElementById('buscador').value = '';
+        document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('activo'));
+        btn.classList.add('activo');
+        catActual = categoria;
+        
+        if (categoria === 'todos') {
+            mostrar(DB);
+        } else {
+            const filtrados = DB.filter(p => p.cat === categoria);
+            mostrar(filtrados);
+        }
+    };
+
+    window.filtrar = () => {
+        let v = document.getElementById('buscador').value.toLowerCase();
+        let f = DB.filter(p => {
+            const coincideNombre = p.nombre.toLowerCase().includes(v);
+            const coincideCat = (catActual === 'todos' || p.cat === catActual);
+            return coincideNombre && coincideCat;
+        });
+        mostrar(f);
+    };
+
     window.abrirFicha = (id) => {
         prodM = DB.find(x => x.id == id);
         cantM = 1;
@@ -344,20 +363,6 @@
         window.open(`https://wa.me/${CONFIG.tel}?text=${m}`, '_blank');
         cerrar();
     }
-
-window.filtrarCat = function(categoria, btn) {
-        document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('activo'));
-        btn.classList.add('activo');
-        if(categoria === 'todos') render(productos);
-        else if(categoria === 'ofertas') render(productos.filter(p => p.oferta));
-        else render(productos.filter(p => p.cat === categoria));
-    }
-
-    window.filtrar = () => {
-        let v = document.getElementById('buscador').value.toLowerCase();
-        let f = DB.filter(p => p.nombre.toLowerCase().includes(v) && (catActual === 'todos' || p.cat === catActual));
-        mostrar(f);
-    };
 
     window.compartir = (n) => { if(navigator.share) navigator.share({title:'Tu Marka', text:`¡Mira esto: ${n}!`, url:window.location.href}); };
 
