@@ -345,24 +345,29 @@
         cerrar();
     }
 
-    window.filtrarCat = function(categoria, btn) {
-    // 1. Quitamos la clase 'activo' de todos los botones y se la ponemos al que tocamos
-    document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('activo'));
+   window.filtrarCat = function(categoria, btn) {
+    // Limpiar buscador para evitar conflictos
+    document.getElementById('buscador').value = '';
+
+    // Cambiar estado visual de los botones
+    const botones = document.querySelectorAll('.btn-cat');
+    botones.forEach(b => b.classList.remove('activo'));
     btn.classList.add('activo');
 
-    // 2. Lógica de filtrado
+    // Lógica de filtrado infalible
+    let listaFiltrada;
+
     if (categoria === 'todos') {
-        // Si es 'todos', mostramos el arreglo original completo
-        render(productos);
+        listaFiltrada = productos;
     } else if (categoria === 'ofertas') {
-        // Filtramos solo los que tienen la propiedad oferta en true
-        const soloOfertas = productos.filter(p => p.oferta === true);
-        render(soloOfertas);
+        listaFiltrada = productos.filter(p => p.oferta === true);
     } else {
-        // Filtramos por la categoría normal (tazas, ropa, etc.)
-        const filtrados = productos.filter(p => p.cat === categoria);
-        render(filtrados);
+        // Esto filtra tazas, ropa, accesorios, etc.
+        listaFiltrada = productos.filter(p => p.cat === categoria);
     }
+
+    // Dibujar los productos resultantes
+    render(listaFiltrada);
 };
 
     window.filtrar = () => {
