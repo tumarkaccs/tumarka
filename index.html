@@ -345,30 +345,13 @@
         cerrar();
     }
 
-   window.filtrarCat = function(categoria, btn) {
-    // Limpiar buscador para evitar conflictos
-    document.getElementById('buscador').value = '';
-
-    // Cambiar estado visual de los botones
-    const botones = document.querySelectorAll('.btn-cat');
-    botones.forEach(b => b.classList.remove('activo'));
-    btn.classList.add('activo');
-
-    // Lógica de filtrado infalible
-    let listaFiltrada;
-
-    if (categoria === 'todos') {
-        listaFiltrada = productos;
-    } else if (categoria === 'ofertas') {
-        listaFiltrada = productos.filter(p => p.oferta === true);
-    } else {
-        // Esto filtra tazas, ropa, accesorios, etc.
-        listaFiltrada = productos.filter(p => p.cat === categoria);
+window.filtrarCat = function(categoria, btn) {
+        document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('activo'));
+        btn.classList.add('activo');
+        if(categoria === 'todos') render(productos);
+        else if(categoria === 'ofertas') render(productos.filter(p => p.oferta));
+        else render(productos.filter(p => p.cat === categoria));
     }
-
-    // Dibujar los productos resultantes
-    render(listaFiltrada);
-};
 
     window.filtrar = () => {
         let v = document.getElementById('buscador').value.toLowerCase();
