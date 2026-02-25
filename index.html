@@ -345,12 +345,25 @@
         cerrar();
     }
 
-    window.filtrarCat = (c, b) => {
-        document.querySelectorAll('.btn-cat').forEach(x => x.classList.remove('activo'));
-        b.classList.add('activo');
-        catActual = c;
-        filtrar();
-    };
+    window.filtrarCat = function(categoria, btn) {
+    // 1. Quitamos la clase 'activo' de todos los botones y se la ponemos al que tocamos
+    document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('activo'));
+    btn.classList.add('activo');
+
+    // 2. Lógica de filtrado
+    if (categoria === 'todos') {
+        // Si es 'todos', mostramos el arreglo original completo
+        render(productos);
+    } else if (categoria === 'ofertas') {
+        // Filtramos solo los que tienen la propiedad oferta en true
+        const soloOfertas = productos.filter(p => p.oferta === true);
+        render(soloOfertas);
+    } else {
+        // Filtramos por la categoría normal (tazas, ropa, etc.)
+        const filtrados = productos.filter(p => p.cat === categoria);
+        render(filtrados);
+    }
+};
 
     window.filtrar = () => {
         let v = document.getElementById('buscador').value.toLowerCase();
