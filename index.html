@@ -14,6 +14,8 @@
             --verde-wa: #25D366;
             --texto: #2c3e50;
             --skeleton: #e2e8f0;
+            --gris-suave: #f1f5f9;
+            --cian: #007bbd;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
@@ -35,7 +37,7 @@
 
         /* BUSCADOR Y CATEGORÍAS */
         .search-box { position: relative; margin: 15px 0; }
-        #buscador { width: 100%; padding: 14px 45px; border-radius: 15px; border: 2px solid #edf2f7; background: white; font-size: 1rem; transition: 0.3s; }
+        #buscador { width: 100%; padding: 14px 45px; border-radius: 15px; border: 2px solid #0979f7; background: #f1f5f9; font-size: 1rem; transition: 0.3s; }
         .search-icon { position: absolute; left: 15px; top: 14px; opacity: 0.4; }
         .categorias { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; padding: 10px 0 20px 0; }
         .btn-cat { background: white; color: var(--petroleo); border: 2px solid var(--petroleo); padding: 10px 5px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 0.8rem; text-align: center; }
@@ -76,10 +78,33 @@
         .btn-main { background: var(--verde-wa); color: white; padding: 12px 25px; border-radius: 25px; border: none; font-weight: 800; cursor: pointer; display: none; }
         .item-c { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
         .btn-del { color: #ef4444; border: none; background: none; font-weight: bold; cursor: pointer; }
+
+        /* NAVEGACIÓN */
+.top-nav { 
+    display: flex; 
+    justify-content: center; /* Esto los centra */
+    gap: 10px;               /* Espacio entre botones */
+    padding: 10px; 
+    background: var(--gris-suave); /* Color de fondo de la barrita */
+}
+
+.btn-nav { 
+    text-decoration: none; 
+    font-size: 0.7rem; 
+    font-weight: 700; 
+    color: var(--cian);       /* Color del texto (Cian) */
+    border: 1px solid var(--cian); /* Borde del botón */
+    padding: 5px 10px; 
+    border-radius: 20px;      /* Bordes redondeados */
+}
     </style>
 </head>
 <body>
-
+<div class="top-nav">
+    <a href="https://www.instagram.com/tu_marka/" target="_blank" class="btn-nav">INSTAGRAM</a>
+    
+    <a href="https://tumarkaccs.github.io/Imagenes/" target="_blank" class="btn-nav">CATÁLOGO DE IMAGENES</a>
+</div>
 <header>
     <img id="logo-dinamico" src="" class="logo-img" alt="Logo">
     <div class="sub-logo">Premium Collection</div>
