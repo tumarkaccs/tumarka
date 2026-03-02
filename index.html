@@ -46,32 +46,24 @@
         .search-box { position: relative; margin: 15px 0; }
         #buscador { width: 100%; padding: 14px 45px; border-radius: 15px; border: 2px solid #0979f7; background: #f1f5f9; font-size: 1rem; transition: 0.3s; }
         .search-icon { position: absolute; left: 15px; top: 14px; opacity: 0.4; }
-        .categorias { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; padding: 10px 0 20px 0; }
-        .btn-cat { background: white; color: var(--petroleo); border: 2px solid var(--petroleo); padding: 10px 5px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 0.8rem; text-align: center; }
-        .btn-cat.activo { background: var(--purpura) !important; color: white !important; border-color: var(--purpura) !important; }
+        
+        /* BOTONES CATEGORÍAS */
+        .categorias { display: flex; overflow-x: auto; gap: 8px; padding: 10px 0 20px 0; scrollbar-width: none; }
+        .categorias::-webkit-scrollbar { display: none; }
+        .cat-pill { display: flex; align-items: center; background: white; border: 2px solid var(--petroleo); border-radius: 12px; padding-right: 5px; }
+        .btn-cat { background: transparent; color: var(--petroleo); border: none; padding: 10px 12px; font-weight: 700; cursor: pointer; font-size: 0.8rem; white-space: nowrap; }
+        .btn-cat.activo { background: var(--purpura) !important; color: white !important; height: 100%; border-radius: 9px 0 0 9px; }
+        .share-cat { background: transparent; border: none; padding: 5px; cursor: pointer; color: var(--petroleo); opacity: 0.6; }
+        .cat-pill.activo { border-color: var(--purpura); }
+        .cat-pill.activo .share-cat { color: white; opacity: 1; }
 
         /* GRID ADAPTABLE */
         .galeria { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         @media (min-width: 768px) { .galeria { grid-template-columns: repeat(3, 1fr); } }
         @media (min-width: 1024px) { .galeria { grid-template-columns: repeat(4, 1fr); } }
 
-        /* BANDERITA PROMOCIONAL */
-        .badge-promo {
-            position: absolute;
-            top: 10px;
-            left: -5px;
-            background: var(--purpura);
-            color: white;
-            padding: 4px 10px;
-            font-size: 0.65rem;
-            font-weight: 800;
-            border-radius: 0 15px 15px 0;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-            z-index: 10;
-            text-transform: uppercase;
-        }
+        .badge-promo { position: absolute; top: 10px; left: -5px; background: var(--purpura); color: white; padding: 4px 10px; font-size: 0.65rem; font-weight: 800; border-radius: 0 15px 15px 0; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); z-index: 10; text-transform: uppercase; }
 
-        /* PRODUCTO */
         .producto { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #f0f0f0; display: flex; flex-direction: column; position: relative; }
         .producto img { width: 100%; height: 180px; object-fit: contain; background: white; padding: 10px; border-bottom: 1px solid #f1f5f9; cursor: pointer; }
         .p-info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; text-align: center; }
@@ -83,17 +75,18 @@
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
         .modal-content { background: white; width: 100%; max-width: 450px; border-radius: 20px; padding: 25px; max-height: 90vh; overflow-y: auto; position: relative; }
         
-        .btn-opcion { display: block; width: 100%; padding: 14px; margin: 10px 0; border: 2px solid #eee; border-radius: 12px; text-align: left; font-weight: bold; cursor: pointer; background: white; transition: 0.3s; }
-        .btn-opcion.seleccionado { border-color: var(--purpura); background: #fdf2f8; color: var(--purpura); box-shadow: 0 0 0 1px var(--purpura); }
+        .btn-share-prod { background: #f1f5f9; color: var(--texto); border: none; padding: 10px; border-radius: 10px; margin-top: 10px; width: 100%; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
         .footer-cart { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -4px 15px rgba(0,0,0,0.08); z-index: 1100; }
         .btn-main { background: var(--verde-wa); color: white; padding: 12px 25px; border-radius: 25px; border: none; font-weight: 800; cursor: pointer; display: none; }
-        .item-c { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
-        .btn-del { color: #ef4444; border: none; background: none; font-weight: bold; cursor: pointer; }
-
-        /* NAVEGACIÓN */
         .top-nav { display: flex; justify-content: center; gap: 10px; padding: 10px; background: var(--gris-suave); }
         .btn-nav { text-decoration: none; font-size: 0.7rem; font-weight: 700; color: var(--cian); border: 1px solid var(--cian); padding: 5px 10px; border-radius: 20px; }
+        
+        /* ESTILOS CARRITO ORIGINALES */
+        .btn-opcion { width: 100%; padding: 12px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 10px; background: white; cursor: pointer; font-weight: bold; }
+        .btn-opcion.seleccionado { border-color: var(--petroleo); background: #e0f0ff; }
+        .item-c { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+        .btn-del { background: none; border: none; color: #ff4444; font-weight: bold; margin-left: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -126,7 +119,10 @@
     </div>
 
     <div class="categorias" id="cat-bar">
-        <button class="btn-cat activo" onclick="filtrarCat('todos', this)">Todos</button>
+        <div class="cat-pill activo" id="pill-todos">
+            <button class="btn-cat activo" onclick="filtrarCat('todos', this)">Todos</button>
+            <button class="share-cat" onclick="compartirRuta('todos')">🔗</button>
+        </div>
     </div>
 
     <div class="galeria" id="grid"></div>
@@ -141,10 +137,13 @@
         
         <div style="margin-top:15px;">
             <label style="font-size:0.8rem; font-weight:bold; color:var(--purpura);">Instrucciones o nota (opcional):</label>
-            <textarea id="m-nota" placeholder="Ej: Talla M, color azul, nombre para personalizar..." style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd; font-family:inherit; margin-top:5px; resize: none;" rows="2"></textarea>
+            <textarea id="m-nota" placeholder="Ej: Talla M, nombre..." style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd; font-family:inherit; margin-top:5px; resize: none;" rows="2"></textarea>
         </div>
 
         <button id="m-btn-add" class="btn-add" style="margin-top:15px; padding:15px;">🛒 Agregar al Carrito</button>
+        
+        <button id="m-btn-share" class="btn-share-prod">📤 Compartir este producto</button>
+        
         <button onclick="cerrar()" style="width:100%; background:none; border:none; color:#94a3b8; margin-top:10px; cursor:pointer;">Cerrar</button>
     </div>
 </div>
@@ -179,6 +178,8 @@
     
     let params = new URLSearchParams(window.location.search);
     let imagenUrlAuto = params.get('imagen');
+    let catUrl = params.get('cat');
+    let prodUrl = params.get('p');
 
     async function cargar() {
         if(imagenUrlAuto) {
@@ -200,24 +201,53 @@
             const dP = await rP.text();
             DB = dP.split(/\r?\n/).slice(1).map(f => {
                 const c = f.split(',');
-                return { 
-                    id:c[0], nombre:c[1], precio:parseFloat(c[2])||0, cat:c[3]?.toLowerCase().trim(), 
-                    promo: c[4]?.trim() || "", img:c[5], desc:c[7] 
-                };
+                return { id:c[0], nombre:c[1], precio:parseFloat(c[2])||0, cat:c[3]?.toLowerCase().trim(), promo: c[4]?.trim() || "", img:c[5], desc:c[7] };
             }).filter(p => p.nombre);
 
+            const catBar = document.getElementById('cat-bar');
             [...new Set(DB.map(p => p.cat))].forEach(c => {
                 if(!c) return;
-                let b = document.createElement('button');
-                b.className = 'btn-cat';
-                b.innerText = c.charAt(0).toUpperCase() + c.slice(1);
-                b.onclick = (e) => filtrarCat(c, e.target);
-                document.getElementById('cat-bar').appendChild(b);
+                let pill = document.createElement('div');
+                pill.className = 'cat-pill';
+                pill.innerHTML = `
+                    <button class="btn-cat" onclick="filtrarCat('${c}', this)">${c.charAt(0).toUpperCase() + c.slice(1)}</button>
+                    <button class="share-cat" onclick="compartirRuta('${c}')">🔗</button>
+                `;
+                catBar.appendChild(pill);
             });
 
-            mostrar(mezclarProductos([...DB])); 
+            if(prodUrl) {
+                mostrar(DB);
+                abrirFicha(prodUrl);
+            } else if(catUrl) {
+                catActual = catUrl.toLowerCase();
+                const botones = Array.from(document.querySelectorAll('.btn-cat'));
+                const btnEncontrado = botones.find(b => b.innerText.toLowerCase() === catActual);
+                if(btnEncontrado) filtrarCat(catActual, btnEncontrado);
+            } else {
+                mostrar(mezclarProductos([...DB])); 
+            }
+
         } catch (e) { console.error(e); }
     }
+
+    window.compartirRuta = (cat) => {
+        const url = `${window.location.origin}${window.location.pathname}?cat=${encodeURIComponent(cat)}`;
+        if (navigator.share) {
+            navigator.share({ title: 'Tu Marka', text: `Mira nuestra categoría ${cat} en Tu Marka`, url: url });
+        } else {
+            prompt("Copia este enlace:", url);
+        }
+    };
+
+    window.compartirProducto = (id, nombre) => {
+        const url = `${window.location.origin}${window.location.pathname}?p=${id}`;
+        if (navigator.share) {
+            navigator.share({ title: nombre, text: `Mira este producto en Tu Marka: ${nombre}`, url: url });
+        } else {
+            prompt("Copia este enlace:", url);
+        }
+    };
 
     function mezclarProductos(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -245,21 +275,11 @@
         });
     }
 
-    window.addSimple = (id, nota = "") => {
-        let p = DB.find(x => x.id == id);
-        let personalizado = imagenUrlAuto ? `Catálogo: ${decodeURIComponent(imagenUrlAuto)}` : "";
-        CART.push({ 
-            ...p, 
-            tid: Date.now(), 
-            diseño: personalizado,
-            instruccion: nota.trim() 
-        });
-        actualizar();
-    };
-
     window.filtrarCat = (c, btn) => {
         document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('activo'));
+        document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('activo'));
         btn.classList.add('activo');
+        btn.parentElement.classList.add('activo');
         catActual = c;
         let filtrados = c === 'todos' ? [...DB] : DB.filter(p => p.cat === c);
         if(c === 'todos') filtrados = mezclarProductos(filtrados);
@@ -274,11 +294,13 @@
 
     window.abrirFicha = (id) => {
         let p = DB.find(x => x.id == id);
+        if(!p) return;
         document.getElementById('m-img').src = p.img;
         document.getElementById('m-nombre').innerText = p.nombre;
         document.getElementById('m-desc').innerText = p.desc || "Sin descripción.";
         document.getElementById('m-precio').innerText = `$${p.precio.toFixed(2)}`;
-        document.getElementById('m-nota').value = ""; // Limpiar nota anterior
+        document.getElementById('m-nota').value = "";
+        document.getElementById('m-btn-share').onclick = () => compartirProducto(p.id, p.nombre);
         document.getElementById('m-btn-add').onclick = () => { 
             let nota = document.getElementById('m-nota').value;
             addSimple(id, nota); 
@@ -287,25 +309,23 @@
         document.getElementById('modalFicha').style.display = 'flex';
     };
 
+    window.addSimple = (id, nota = "") => {
+        let p = DB.find(x => x.id == id);
+        let personalizado = imagenUrlAuto ? `Catálogo: ${decodeURIComponent(imagenUrlAuto)}` : "";
+        CART.push({ ...p, tid: Date.now(), diseño: personalizado, instruccion: nota.trim() });
+        actualizar();
+    };
+
     function actualizar() {
         let t = 0;
         const l = document.getElementById('c-lista');
         l.innerHTML = '';
         CART.forEach(i => {
             t += i.precio;
-            // Mostrar diseño del catálogo e instrucciones en el carrito
-            let detallesHTML = "";
-            if(i.diseño) detallesHTML += `<small style="color:var(--purpura); display:block;">🎨 ${i.diseño}</small>`;
-            if(i.instruccion) detallesHTML += `<small style="color:#64748b; display:block; font-style:italic;">📝 Nota: ${i.instruccion}</small>`;
-            
-            l.innerHTML += `
-                <div class="item-c">
-                    <div style="flex:1; padding-right:10px;">
-                        <b>${i.nombre}</b>
-                        ${detallesHTML}
-                    </div>
-                    <span>$${i.precio.toFixed(2)} <button class="btn-del" onclick="borrar(${i.tid})">✕</button></span>
-                </div>`;
+            let dH = "";
+            if(i.diseño) dH += `<small style="color:var(--purpura); display:block;">🎨 ${i.diseño}</small>`;
+            if(i.instruccion) dH += `<small style="color:#64748b; display:block; font-style:italic;">📝 Nota: ${i.instruccion}</small>`;
+            l.innerHTML += `<div class="item-c"><div style="flex:1;"><b>${i.nombre}</b>${dH}</div><span>$${i.precio.toFixed(2)}<button class="btn-del" onclick="borrar(${i.tid})">✕</button></span></div>`;
         });
         document.getElementById('n-items').innerText = `${CART.length} productos`;
         document.getElementById('f-total').innerText = `$${t.toFixed(2)}`;
@@ -314,15 +334,25 @@
     }
 
     window.borrar = (tid) => { CART = CART.filter(x => x.tid != tid); actualizar(); if(!CART.length) cerrar(); };
-    window.cerrar = () => document.querySelectorAll('.modal').forEach(m => m.style.display='none');
+    window.cerrar = () => {
+        document.querySelectorAll('.modal').forEach(m => m.style.display='none');
+        if(prodUrl || catUrl) {
+            window.history.replaceState({}, document.title, window.location.pathname);
+            prodUrl = null; catUrl = null;
+        }
+    };
     window.abrirCarrito = () => { if(CART.length) document.getElementById('modalCarrito').style.display='flex'; };
 
     window.selEntrega = (metodo, btn) => {
         entregaM = metodo;
         document.querySelectorAll('.btn-opcion').forEach(b => b.classList.remove('seleccionado'));
         btn.classList.add('seleccionado');
-        document.getElementById('btn-final-wa').style.display='block';
-        if(metodo === 'Retiro en Tienda') document.getElementById('dir-val').style.display='none';
+        document.getElementById('btn-final-wa').style.display = 'block';
+        
+        // Si elige Retiro, ocultamos el campo de dirección
+        if(metodo === 'Retiro en Tienda') {
+            document.getElementById('dir-val').style.display = 'none';
+        }
     };
 
     window.abrirDelivery = (btn) => {
@@ -333,19 +363,16 @@
     function enviarWA() {
         let dir = document.getElementById('dir-val').value;
         if(entregaM === 'Delivery' && !dir) return alert("Por favor, ingresa tu dirección.");
-        
         let total = 0;
         let pStr = CART.map((i, idx) => {
             total += i.precio;
-            let itemText = `${idx + 1}. *${i.nombre}* ($${i.precio.toFixed(2)})`;
-            if(i.diseño) itemText += `%0A   🎨 _${i.diseño}_`;
-            if(i.instruccion) itemText += `%0A   📝 _Instrucción: ${i.instruccion}_`;
-            return itemText;
+            let iT = `${idx + 1}. *${i.nombre}* ($${i.precio.toFixed(2)})`;
+            if(i.diseño) iT += `%0A   🎨 _${i.diseño}_`;
+            if(i.instruccion) iT += `%0A   📝 _Nota: ${i.instruccion}_`;
+            return iT;
         }).join('%0A%0A');
-
         let m = `*¡Hola, Tu Marka!* 🙌%0AHe armado mi carrito:%0A%0A*DETALLE DE MI COMPRA*%0A------------------------------------------%0A${pStr}%0A------------------------------------------%0A💰 *TOTAL: $${total.toFixed(2)}*%0A%0A📍 *Método:* ${entregaM}`;
         if(entregaM === 'Delivery') m += `%0A🏠 *Dirección:* ${dir}`;
-        
         window.open(`https://wa.me/${CONFIG.tel.replace(/\s+/g,'')}?text=${m}`, '_blank');
         cerrar();
     }
