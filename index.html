@@ -21,6 +21,13 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: var(--fondo); color: var(--texto); padding-bottom: 100px; line-height: 1.4; }
 
+        /* AVISO AUTOMÁTICO DE IMAGEN */
+        #aviso-perso { 
+            display: none; background: var(--purpura); color: white; 
+            padding: 10px; text-align: center; font-weight: bold; font-size: 0.9rem;
+            position: sticky; top: 0; z-index: 1100; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
         /* HEADER */
         header { background: var(--blanco); padding: 1.2rem; text-align: center; border-bottom: 3px solid var(--petroleo); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .logo-texto { font-size: 1.7rem; font-weight: 900; color: var(--petroleo); margin: 0; letter-spacing: -1px; text-transform: uppercase; }
@@ -48,10 +55,21 @@
         @media (min-width: 768px) { .galeria { grid-template-columns: repeat(3, 1fr); } }
         @media (min-width: 1024px) { .galeria { grid-template-columns: repeat(4, 1fr); } }
 
-        /* SKELETON */
-        .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: loading 1.5s infinite; border-radius: 10px; }
-        @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-        .sk-card { height: 280px; background: white; border-radius: 15px; padding: 10px; border: 1px solid #eee; }
+        /* BANDERITA PROMOCIONAL */
+        .badge-promo {
+            position: absolute;
+            top: 10px;
+            left: -5px;
+            background: var(--purpura);
+            color: white;
+            padding: 4px 10px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            z-index: 10;
+            text-transform: uppercase;
+        }
 
         /* PRODUCTO */
         .producto { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #f0f0f0; display: flex; flex-direction: column; position: relative; }
@@ -65,14 +83,8 @@
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
         .modal-content { background: white; width: 100%; max-width: 450px; border-radius: 20px; padding: 25px; max-height: 90vh; overflow-y: auto; position: relative; }
         
-        /* BOTONES DE ENTREGA SELECCIONADOS */
         .btn-opcion { display: block; width: 100%; padding: 14px; margin: 10px 0; border: 2px solid #eee; border-radius: 12px; text-align: left; font-weight: bold; cursor: pointer; background: white; transition: 0.3s; }
-        .btn-opcion.seleccionado { 
-            border-color: var(--purpura); 
-            background: #fdf2f8; 
-            color: var(--purpura);
-            box-shadow: 0 0 0 1px var(--purpura);
-        }
+        .btn-opcion.seleccionado { border-color: var(--purpura); background: #fdf2f8; color: var(--purpura); box-shadow: 0 0 0 1px var(--purpura); }
 
         .footer-cart { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -4px 15px rgba(0,0,0,0.08); z-index: 1100; }
         .btn-main { background: var(--verde-wa); color: white; padding: 12px 25px; border-radius: 25px; border: none; font-weight: 800; cursor: pointer; display: none; }
@@ -80,31 +92,22 @@
         .btn-del { color: #ef4444; border: none; background: none; font-weight: bold; cursor: pointer; }
 
         /* NAVEGACIÓN */
-.top-nav { 
-    display: flex; 
-    justify-content: center; /* Esto los centra */
-    gap: 10px;               /* Espacio entre botones */
-    padding: 10px; 
-    background: var(--gris-suave); /* Color de fondo de la barrita */
-}
-
-.btn-nav { 
-    text-decoration: none; 
-    font-size: 0.7rem; 
-    font-weight: 700; 
-    color: var(--cian);       /* Color del texto (Cian) */
-    border: 1px solid var(--cian); /* Borde del botón */
-    padding: 5px 10px; 
-    border-radius: 20px;      /* Bordes redondeados */
-}
+        .top-nav { display: flex; justify-content: center; gap: 10px; padding: 10px; background: var(--gris-suave); }
+        .btn-nav { text-decoration: none; font-size: 0.7rem; font-weight: 700; color: var(--cian); border: 1px solid var(--cian); padding: 5px 10px; border-radius: 20px; }
     </style>
 </head>
 <body>
+
+<div id="aviso-perso">
+    🎨 Imagen seleccionada: <span id="nombre-img-auto"></span> 
+    <button onclick="limpiarImagenUrl()" style="background:white; border:none; border-radius:5px; margin-left:10px; cursor:pointer; font-weight:bold;">X</button>
+</div>
+
 <div class="top-nav">
     <a href="https://www.instagram.com/tu_marka/" target="_blank" class="btn-nav">INSTAGRAM</a>
-    
     <a href="https://tumarkaccs.github.io/Imagenes/" class="btn-nav">CATÁLOGO DE IMAGENES</a>
 </div>
+
 <header>
     <img id="logo-dinamico" src="" class="logo-img" alt="Logo">
     <div class="sub-logo">Premium Collection</div>
@@ -124,11 +127,6 @@
 
     <div class="categorias" id="cat-bar">
         <button class="btn-cat activo" onclick="filtrarCat('todos', this)">Todos</button>
-    </div>
-
-    <div id="skeleton-container" class="galeria">
-        <div class="sk-card"><div class="sk-img skeleton" style="height:150px; margin-bottom:10px;"></div><div class="sk-text skeleton" style="height:15px; width:80%;"></div></div>
-        <div class="sk-card"><div class="sk-img skeleton" style="height:150px; margin-bottom:10px;"></div><div class="sk-text skeleton" style="height:15px; width:80%;"></div></div>
     </div>
 
     <div class="galeria" id="grid"></div>
@@ -151,12 +149,9 @@
         <div id="c-lista"></div>
         <div id="c-total" style="text-align:right; font-size:1.4rem; font-weight:900; margin:20px 0;"></div>
         <p style="font-weight:bold; margin-bottom:5px;">¿Cómo recibes tu compra?</p>
-        
         <button class="btn-opcion" id="btn-retiro" onclick="selEntrega('Retiro en Tienda', this)">🏬 Retiro en Tienda</button>
         <button class="btn-opcion" id="btn-delivery" onclick="abrirDelivery(this)">🛵 Solicitar Delivery</button>
-        
         <input type="text" id="dir-val" placeholder="Dirección exacta para el envío..." style="width:100%; padding:12px; margin-top:10px; display:none; border-radius:8px; border:1px solid #ddd;">
-        
         <button class="btn-add" id="btn-final-wa" style="background:var(--verde-wa); margin-top:20px; display:none; padding:15px;" onclick="enviarWA()">🚀 Enviar Pedido por WhatsApp</button>
     </div>
 </div>
@@ -175,8 +170,17 @@
 
     let DB = [], CART = [], CONFIG = {tel:''};
     let catActual = 'todos', entregaM = '';
+    
+    // Capturar imagen de URL si viene del catálogo
+    let params = new URLSearchParams(window.location.search);
+    let imagenUrlAuto = params.get('imagen');
 
     async function cargar() {
+        if(imagenUrlAuto) {
+            document.getElementById('aviso-perso').style.display = 'block';
+            document.getElementById('nombre-img-auto').innerText = decodeURIComponent(imagenUrlAuto);
+        }
+
         try {
             const [rC, rP] = await Promise.all([fetch(HOJA_CONF), fetch(HOJA_PROD)]);
             const dC = await rC.text();
@@ -191,7 +195,16 @@
             const dP = await rP.text();
             DB = dP.split(/\r?\n/).slice(1).map(f => {
                 const c = f.split(',');
-                return { id:c[0], nombre:c[1], precio:parseFloat(c[2])||0, cat:c[3]?.toLowerCase().trim(), oferta:c[4]?.toLowerCase().trim()==='si', img:c[5], desc:c[7] };
+                return { 
+                    id:c[0], 
+                    nombre:c[1], 
+                    precio:parseFloat(c[2])||0, 
+                    cat:c[3]?.toLowerCase().trim(), 
+                    // LEEMOS LA COLUMNA E (Índice 4) PARA EL TEXTO DE LA BANDERA
+                    promo: c[4]?.trim() || "", 
+                    img:c[5], 
+                    desc:c[7] 
+                };
             }).filter(p => p.nombre);
 
             [...new Set(DB.map(p => p.cat))].forEach(c => {
@@ -203,7 +216,6 @@
                 document.getElementById('cat-bar').appendChild(b);
             });
 
-            document.getElementById('skeleton-container').style.display = 'none';
             mostrar(DB);
         } catch (e) { console.error(e); }
     }
@@ -212,9 +224,35 @@
         const g = document.getElementById('grid');
         g.innerHTML = '';
         lista.forEach(p => {
-            g.innerHTML += `<div class="producto"><img src="${p.img}" loading="lazy" onclick="abrirFicha('${p.id}')"><div class="p-info"><div class="p-nombre">${p.nombre}</div><div class="precio">$${p.precio.toFixed(2)}</div><button class="btn-add" onclick="addSimple('${p.id}')">Añadir</button></div></div>`;
+            // Lógica de la banderita dinámica
+            const banderaHTML = p.promo ? `<div class="badge-promo">${p.promo}</div>` : '';
+            
+            g.innerHTML += `
+                <div class="producto">
+                    ${banderaHTML}
+                    <img src="${p.img}" loading="lazy" onclick="abrirFicha('${p.id}')">
+                    <div class="p-info">
+                        <div class="p-nombre">${p.nombre}</div>
+                        <div class="precio">$${p.precio.toFixed(2)}</div>
+                        <button class="btn-add" onclick="addSimple('${p.id}')">Añadir</button>
+                    </div>
+                </div>`;
         });
     }
+
+    window.addSimple = (id) => {
+        let p = DB.find(x => x.id == id);
+        // Si hay una imagen seleccionada automáticamente, la adjuntamos al producto
+        let personalizado = imagenUrlAuto ? `Catálogo: ${decodeURIComponent(imagenUrlAuto)}` : "Personalización estándar";
+        CART.push({ ...p, tid: Date.now(), diseño: personalizado });
+        actualizar();
+    };
+
+    window.limpiarImagenUrl = () => {
+        window.history.replaceState({}, document.title, window.location.pathname);
+        imagenUrlAuto = null;
+        document.getElementById('aviso-perso').style.display = 'none';
+    };
 
     window.filtrarCat = (c, btn) => {
         document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('activo'));
@@ -226,12 +264,6 @@
     window.filtrar = () => {
         let v = document.getElementById('buscador').value.toLowerCase();
         mostrar(DB.filter(p => p.nombre.toLowerCase().includes(v) && (catActual === 'todos' || p.cat === catActual)));
-    };
-
-    window.addSimple = (id) => {
-        let p = DB.find(x => x.id == id);
-        CART.push({ ...p, tid: Date.now() });
-        actualizar();
     };
 
     window.abrirFicha = (id) => {
@@ -250,7 +282,14 @@
         l.innerHTML = '';
         CART.forEach(i => {
             t += i.precio;
-            l.innerHTML += `<div class="item-c"><span>${i.nombre}</span><span>$${i.precio.toFixed(2)} <button class="btn-del" onclick="borrar(${i.tid})">✕</button></span></div>`;
+            l.innerHTML += `
+                <div class="item-c">
+                    <div>
+                        <b>${i.nombre}</b><br>
+                        <small style="color:var(--purpura)">${i.diseño}</small>
+                    </div>
+                    <span>$${i.precio.toFixed(2)} <button class="btn-del" onclick="borrar(${i.tid})">✕</button></span>
+                </div>`;
         });
         document.getElementById('n-items').innerText = `${CART.length} productos`;
         document.getElementById('f-total').innerText = `$${t.toFixed(2)}`;
@@ -262,14 +301,10 @@
     window.cerrar = () => document.querySelectorAll('.modal').forEach(m => m.style.display='none');
     window.abrirCarrito = () => { if(CART.length) document.getElementById('modalCarrito').style.display='flex'; };
 
-    // LÓGICA DE SELECCIÓN DE ENTREGA CON COLOR
     window.selEntrega = (metodo, btn) => {
         entregaM = metodo;
-        // Quitar clase de todos los botones de opción
         document.querySelectorAll('.btn-opcion').forEach(b => b.classList.remove('seleccionado'));
-        // Poner clase al botón clicado
         btn.classList.add('seleccionado');
-        
         document.getElementById('btn-final-wa').style.display='block';
         if(metodo === 'Retiro en Tienda') document.getElementById('dir-val').style.display='none';
     };
@@ -286,13 +321,12 @@
         let total = 0;
         let pStr = CART.map((i, idx) => {
             total += i.precio;
-            return `${idx + 1}. *${i.nombre}* ($${i.precio.toFixed(2)})`;
+            return `${idx + 1}. *${i.nombre}* - _${i.diseño}_ ($${i.precio.toFixed(2)})`;
         }).join('%0A');
 
-        let m = `*¡Hola, Tu Marka!* 🙌%0AHe armado mi carrito y me gustaría procesar este pedido:%0A%0A*DETALLE DE MI COMPRA*%0A------------------------------------------%0A${pStr}%0A------------------------------------------%0A💰 *TOTAL A PAGAR: $${total.toFixed(2)}*%0A%0A📍 *Método de entrega:* ${entregaM}`;
+        let m = `*¡Hola, Tu Marka!* 🙌%0AHe armado mi carrito:%0A%0A*DETALLE DE MI COMPRA*%0A------------------------------------------%0A${pStr}%0A------------------------------------------%0A💰 *TOTAL: $${total.toFixed(2)}*%0A%0A📍 *Método:* ${entregaM}`;
         if(entregaM === 'Delivery') m += `%0A🏠 *Dirección:* ${dir}`;
-        m += `%0A%0A✨ _Quedo atento/a para coordinar el pago. ¡Gracias!_`;
-
+        
         window.open(`https://wa.me/${CONFIG.tel.replace(/\s+/g,'')}?text=${m}`, '_blank');
         cerrar();
     }
