@@ -13,22 +13,25 @@
             --blanco: #ffffff;
             --verde-wa: #25D366;
             --texto: #2c3e50;
-            --skeleton: #e2e8f0;
             --gris-suave: #f1f5f9;
             --cian: #007bbd;
         }
 
+        /* RESET & BASE */
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: var(--fondo); color: var(--texto); padding-bottom: 100px; line-height: 1.4; }
 
-        /* AVISO AUTOMÁTICO DE IMAGEN */
+        /* AVISO AUTOMÁTICO */
         #aviso-perso { 
             display: none; background: var(--purpura); color: white; 
             padding: 10px; text-align: center; font-weight: bold; font-size: 0.9rem;
             position: sticky; top: 0; z-index: 1100; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* HEADER */
+        /* NAVEGACIÓN Y HEADER */
+        .top-nav { display: flex; justify-content: center; gap: 10px; padding: 10px; background: var(--gris-suave); }
+        .btn-nav { text-decoration: none; font-size: 0.7rem; font-weight: 700; color: var(--cian); border: 1px solid var(--cian); padding: 5px 10px; border-radius: 20px; }
+
         header { background: var(--blanco); padding: 1.2rem; text-align: center; border-bottom: 3px solid var(--petroleo); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .logo-texto { font-size: 1.7rem; font-weight: 900; color: var(--petroleo); margin: 0; letter-spacing: -1px; text-transform: uppercase; }
         .sub-logo { font-size: 0.7rem; color: var(--azul-claro); font-weight: bold; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 4px; }
@@ -37,37 +40,37 @@
         .p-1 { background: var(--petroleo); }
         .p-2 { background: var(--purpura); }
         .p-3 { background: var(--azul-claro); }
-        
         .logo-img { max-width: 150px; height: auto; margin: 0 auto 10px; display: none; }
 
         .contenedor { max-width: 1100px; margin: 0 auto; padding: 15px; }
 
-        /* BUSCADOR Y CATEGORÍAS */
+        /* BUSCADOR */
         .search-box { position: relative; margin: 15px 0; }
-        #buscador { width: 100%; padding: 14px 45px; border-radius: 15px; border: 2px solid #0979f7; background: #f1f5f9; font-size: 1rem; transition: 0.3s; }
+        #buscador { width: 100%; padding: 14px 45px; border-radius: 15px; border: 2px solid var(--petroleo); background: #f1f5f9; font-size: 1rem; transition: 0.3s; }
         .search-icon { position: absolute; left: 15px; top: 14px; opacity: 0.4; }
         
-        /* BOTONES CATEGORÍAS */
-        .categorias { display: flex; overflow-x: auto; gap: 8px; padding: 10px 0 20px 0; scrollbar-width: none; }
-        .categorias::-webkit-scrollbar { display: none; }
-        .cat-pill { display: flex; align-items: center; background: white; border: 2px solid var(--petroleo); border-radius: 12px; padding-right: 5px; }
-        .btn-cat { background: transparent; color: var(--petroleo); border: none; padding: 10px 12px; font-weight: 700; cursor: pointer; font-size: 0.8rem; white-space: nowrap; }
-        .btn-cat.activo { background: var(--purpura) !important; color: white !important; height: 100%; border-radius: 9px 0 0 9px; }
-        .share-cat { background: transparent; border: none; padding: 5px; cursor: pointer; color: var(--petroleo); opacity: 0.6; }
-        .cat-pill.activo { border-color: var(--purpura); }
-        .cat-pill.activo .share-cat { color: white; opacity: 1; }
+        /* CATEGORÍAS GRID */
+        .categorias { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 10px 0 20px 0; }
+        @media (min-width: 480px) { .categorias { grid-template-columns: repeat(4, 1fr); } }
+        @media (min-width: 768px) { .categorias { grid-template-columns: repeat(6, 1fr); } }
 
-        /* GRID ADAPTABLE */
+        .cat-pill { display: flex; align-items: center; background: white; border: 2px solid var(--petroleo); border-radius: 10px; overflow: hidden; justify-content: space-between; }
+        .btn-cat { background: transparent; color: var(--petroleo); border: none; padding: 8px 4px; font-weight: 700; cursor: pointer; font-size: 0.7rem; flex-grow: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .btn-cat.activo { background: var(--purpura) !important; color: white !important; height: 100%; }
+        .share-cat { background: rgba(9, 121, 247, 0.1); border: none; padding: 8px 5px; cursor: pointer; color: var(--petroleo); font-size: 0.7rem; }
+        .cat-pill.activo { border-color: var(--purpura); }
+        .cat-pill.activo .share-cat { color: white; background: var(--purpura); border-left: 1px solid rgba(255,255,255,0.2); }
+
+        /* GALERIA Y PRODUCTO */
         .galeria { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         @media (min-width: 768px) { .galeria { grid-template-columns: repeat(3, 1fr); } }
         @media (min-width: 1024px) { .galeria { grid-template-columns: repeat(4, 1fr); } }
 
-        .badge-promo { position: absolute; top: 10px; left: -5px; background: var(--purpura); color: white; padding: 4px 10px; font-size: 0.65rem; font-weight: 800; border-radius: 0 15px 15px 0; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); z-index: 10; text-transform: uppercase; }
-
         .producto { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #f0f0f0; display: flex; flex-direction: column; position: relative; }
-        .producto img { width: 100%; height: 180px; object-fit: contain; background: white; padding: 10px; border-bottom: 1px solid #f1f5f9; cursor: pointer; }
+        .badge-promo { position: absolute; top: 10px; left: -5px; background: var(--purpura); color: white; padding: 4px 10px; font-size: 0.65rem; font-weight: 800; border-radius: 0 15px 15px 0; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); z-index: 10; text-transform: uppercase; }
+        .producto img { width: 100%; height: 180px; object-fit: contain; padding: 10px; border-bottom: 1px solid #f1f5f9; cursor: pointer; }
         .p-info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; text-align: center; }
-        .p-nombre { font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 4px; height: 2.4em; overflow: hidden; }
+        .p-nombre { font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 8px; min-height: 2.5em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.25; }
         .precio { color: var(--petroleo); font-weight: 800; font-size: 1.1rem; margin-bottom: 10px; }
         .btn-add { background: var(--petroleo); color: white; border: none; padding: 10px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
 
@@ -75,14 +78,15 @@
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
         .modal-content { background: white; width: 100%; max-width: 450px; border-radius: 20px; padding: 25px; max-height: 90vh; overflow-y: auto; position: relative; }
         
+        /* Botón X superior */
+        .btn-close-modal { position: absolute; top: 15px; right: 15px; width: 32px; height: 32px; background: #f1f5f9; color: #64748b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: bold; cursor: pointer; border: none; z-index: 10; transition: 0.2s; padding: 0; line-height: 1; }
+        .btn-close-modal:hover { background: #e2e8f0; color: var(--purpura); }
+
         .btn-share-prod { background: #f1f5f9; color: var(--texto); border: none; padding: 10px; border-radius: 10px; margin-top: 10px; width: 100%; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
+        /* FOOTER Y CARRITO */
         .footer-cart { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -4px 15px rgba(0,0,0,0.08); z-index: 1100; }
         .btn-main { background: var(--verde-wa); color: white; padding: 12px 25px; border-radius: 25px; border: none; font-weight: 800; cursor: pointer; display: none; }
-        .top-nav { display: flex; justify-content: center; gap: 10px; padding: 10px; background: var(--gris-suave); }
-        .btn-nav { text-decoration: none; font-size: 0.7rem; font-weight: 700; color: var(--cian); border: 1px solid var(--cian); padding: 5px 10px; border-radius: 20px; }
-        
-        /* ESTILOS CARRITO ORIGINALES */
         .btn-opcion { width: 100%; padding: 12px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 10px; background: white; cursor: pointer; font-weight: bold; }
         .btn-opcion.seleccionado { border-color: var(--petroleo); background: #e0f0ff; }
         .item-c { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
@@ -130,6 +134,7 @@
 
 <div id="modalFicha" class="modal" onclick="cerrar()">
     <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="btn-close-modal" onclick="cerrar()">&times;</button>
         <img id="m-img" style="width:100%; height:250px; object-fit:contain; margin-bottom:15px;">
         <h2 id="m-nombre" style="margin:0;"></h2>
         <div id="m-desc" style="background:#f8fafb; padding:15px; margin:15px 0; border-radius:10px; font-size:0.9rem;"></div>
@@ -141,15 +146,13 @@
         </div>
 
         <button id="m-btn-add" class="btn-add" style="margin-top:15px; padding:15px;">🛒 Agregar al Carrito</button>
-        
         <button id="m-btn-share" class="btn-share-prod">📤 Compartir este producto</button>
-        
-        <button onclick="cerrar()" style="width:100%; background:none; border:none; color:#94a3b8; margin-top:10px; cursor:pointer;">Cerrar</button>
     </div>
 </div>
 
 <div id="modalCarrito" class="modal" onclick="cerrar()">
     <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="btn-close-modal" onclick="cerrar()">&times;</button>
         <h2 style="text-align:center;">Tu Pedido</h2>
         <div id="c-lista"></div>
         <div id="c-total" style="text-align:right; font-size:1.4rem; font-weight:900; margin:20px 0;"></div>
@@ -194,7 +197,10 @@
                 const [k, v] = f.split(',');
                 if(k && v) {
                     if(k.toLowerCase().includes("tel")) CONFIG.tel = v.trim();
-                    if(k.toLowerCase().includes("logo")) { document.getElementById('logo-dinamico').src = v.trim(); document.getElementById('logo-dinamico').style.display='block'; }
+                    if(k.toLowerCase().includes("logo")) { 
+                        document.getElementById('logo-dinamico').src = v.trim(); 
+                        document.getElementById('logo-dinamico').style.display='block'; 
+                    }
                 }
             });
 
@@ -209,45 +215,20 @@
                 if(!c) return;
                 let pill = document.createElement('div');
                 pill.className = 'cat-pill';
-                pill.innerHTML = `
-                    <button class="btn-cat" onclick="filtrarCat('${c}', this)">${c.charAt(0).toUpperCase() + c.slice(1)}</button>
-                    <button class="share-cat" onclick="compartirRuta('${c}')">🔗</button>
-                `;
+                pill.innerHTML = `<button class="btn-cat" onclick="filtrarCat('${c}', this)">${c.charAt(0).toUpperCase() + c.slice(1)}</button>
+                                  <button class="share-cat" onclick="compartirRuta('${c}')">🔗</button>`;
                 catBar.appendChild(pill);
             });
 
-            if(prodUrl) {
-                mostrar(DB);
-                abrirFicha(prodUrl);
-            } else if(catUrl) {
+            if(prodUrl) { mostrar(DB); abrirFicha(prodUrl); } 
+            else if(catUrl) {
                 catActual = catUrl.toLowerCase();
-                const botones = Array.from(document.querySelectorAll('.btn-cat'));
-                const btnEncontrado = botones.find(b => b.innerText.toLowerCase() === catActual);
+                const btnEncontrado = Array.from(document.querySelectorAll('.btn-cat')).find(b => b.innerText.toLowerCase() === catActual);
                 if(btnEncontrado) filtrarCat(catActual, btnEncontrado);
-            } else {
-                mostrar(mezclarProductos([...DB])); 
-            }
-
+            } 
+            else { mostrar(mezclarProductos([...DB])); }
         } catch (e) { console.error(e); }
     }
-
-    window.compartirRuta = (cat) => {
-        const url = `${window.location.origin}${window.location.pathname}?cat=${encodeURIComponent(cat)}`;
-        if (navigator.share) {
-            navigator.share({ title: 'Tu Marka', text: `Mira nuestra categoría ${cat} en Tu Marka`, url: url });
-        } else {
-            prompt("Copia este enlace:", url);
-        }
-    };
-
-    window.compartirProducto = (id, nombre) => {
-        const url = `${window.location.origin}${window.location.pathname}?p=${id}`;
-        if (navigator.share) {
-            navigator.share({ title: nombre, text: `Mira este producto en Tu Marka: ${nombre}`, url: url });
-        } else {
-            prompt("Copia este enlace:", url);
-        }
-    };
 
     function mezclarProductos(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -261,10 +242,10 @@
         const g = document.getElementById('grid');
         g.innerHTML = '';
         lista.forEach(p => {
-            const banderaHTML = p.promo ? `<div class="badge-promo">${p.promo}</div>` : '';
+            const badge = p.promo ? `<div class="badge-promo">${p.promo}</div>` : '';
             g.innerHTML += `
                 <div class="producto">
-                    ${banderaHTML}
+                    ${badge}
                     <img src="${p.img}" loading="lazy" onclick="abrirFicha('${p.id}')">
                     <div class="p-info">
                         <div class="p-nombre">${p.nombre}</div>
@@ -276,20 +257,17 @@
     }
 
     window.filtrarCat = (c, btn) => {
-        document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('activo'));
-        document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('activo'));
+        document.querySelectorAll('.btn-cat, .cat-pill').forEach(el => el.classList.remove('activo'));
         btn.classList.add('activo');
         btn.parentElement.classList.add('activo');
         catActual = c;
-        let filtrados = c === 'todos' ? [...DB] : DB.filter(p => p.cat === c);
-        if(c === 'todos') filtrados = mezclarProductos(filtrados);
+        let filtrados = c === 'todos' ? mezclarProductos([...DB]) : DB.filter(p => p.cat === c);
         mostrar(filtrados);
     };
 
     window.filtrar = () => {
         let v = document.getElementById('buscador').value.toLowerCase();
-        let res = DB.filter(p => p.nombre.toLowerCase().includes(v) && (catActual === 'todos' || p.cat === catActual));
-        mostrar(res);
+        mostrar(DB.filter(p => p.nombre.toLowerCase().includes(v) && (catActual === 'todos' || p.cat === catActual)));
     };
 
     window.abrirFicha = (id) => {
@@ -301,11 +279,7 @@
         document.getElementById('m-precio').innerText = `$${p.precio.toFixed(2)}`;
         document.getElementById('m-nota').value = "";
         document.getElementById('m-btn-share').onclick = () => compartirProducto(p.id, p.nombre);
-        document.getElementById('m-btn-add').onclick = () => { 
-            let nota = document.getElementById('m-nota').value;
-            addSimple(id, nota); 
-            cerrar(); 
-        };
+        document.getElementById('m-btn-add').onclick = () => { addSimple(id, document.getElementById('m-nota').value); cerrar(); };
         document.getElementById('modalFicha').style.display = 'flex';
     };
 
@@ -322,8 +296,7 @@
         l.innerHTML = '';
         CART.forEach(i => {
             t += i.precio;
-            let dH = "";
-            if(i.diseño) dH += `<small style="color:var(--purpura); display:block;">🎨 ${i.diseño}</small>`;
+            let dH = i.diseño ? `<small style="color:var(--purpura); display:block;">🎨 ${i.diseño}</small>` : "";
             if(i.instruccion) dH += `<small style="color:#64748b; display:block; font-style:italic;">📝 Nota: ${i.instruccion}</small>`;
             l.innerHTML += `<div class="item-c"><div style="flex:1;"><b>${i.nombre}</b>${dH}</div><span>$${i.precio.toFixed(2)}<button class="btn-del" onclick="borrar(${i.tid})">✕</button></span></div>`;
         });
@@ -336,10 +309,7 @@
     window.borrar = (tid) => { CART = CART.filter(x => x.tid != tid); actualizar(); if(!CART.length) cerrar(); };
     window.cerrar = () => {
         document.querySelectorAll('.modal').forEach(m => m.style.display='none');
-        if(prodUrl || catUrl) {
-            window.history.replaceState({}, document.title, window.location.pathname);
-            prodUrl = null; catUrl = null;
-        }
+        if(prodUrl || catUrl) { window.history.replaceState({}, document.title, window.location.pathname); prodUrl = null; catUrl = null; }
     };
     window.abrirCarrito = () => { if(CART.length) document.getElementById('modalCarrito').style.display='flex'; };
 
@@ -348,17 +318,10 @@
         document.querySelectorAll('.btn-opcion').forEach(b => b.classList.remove('seleccionado'));
         btn.classList.add('seleccionado');
         document.getElementById('btn-final-wa').style.display = 'block';
-        
-        // Si elige Retiro, ocultamos el campo de dirección
-        if(metodo === 'Retiro en Tienda') {
-            document.getElementById('dir-val').style.display = 'none';
-        }
+        document.getElementById('dir-val').style.display = (metodo === 'Delivery') ? 'block' : 'none';
     };
 
-    window.abrirDelivery = (btn) => {
-        document.getElementById('dir-val').style.display='block';
-        selEntrega('Delivery', btn);
-    };
+    window.abrirDelivery = (btn) => selEntrega('Delivery', btn);
 
     function enviarWA() {
         let dir = document.getElementById('dir-val').value;
@@ -376,6 +339,22 @@
         window.open(`https://wa.me/${CONFIG.tel.replace(/\s+/g,'')}?text=${m}`, '_blank');
         cerrar();
     }
+
+    window.compartirRuta = (cat) => {
+        const url = `${window.location.origin}${window.location.pathname}?cat=${encodeURIComponent(cat)}`;
+        navigator.share ? navigator.share({ title: 'Tu Marka', url }) : prompt("Copia el enlace:", url);
+    };
+
+    window.compartirProducto = (id, nombre) => {
+        const url = `${window.location.origin}${window.location.pathname}?p=${id}`;
+        navigator.share ? navigator.share({ title: nombre, url }) : prompt("Copia el enlace:", url);
+    };
+
+    window.limpiarImagenUrl = () => {
+        imagenUrlAuto = null;
+        document.getElementById('aviso-perso').style.display = 'none';
+        window.history.replaceState({}, document.title, window.location.pathname);
+    };
 
     cargar();
 </script>
