@@ -193,21 +193,7 @@ header {
 @media (max-width: 380px) {
     .aviso-top { gap: 8px; font-size: 0.6rem; }
 }
-/* EFECTO DE LUZ SUTIL */
-.aviso-top::after {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 50%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    animation: brillo 4s infinite;
-}
 
-@keyframes brillo {
-    0% { left: -100%; }
-    20% { left: 150%; }
-    100% { left: 150%; }
-}
 /* BOTÓN CÓMO LLEGAR SUTIL */
 .btn-como-llegar {
     display: inline-flex;
